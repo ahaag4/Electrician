@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - PowerPro Electricians</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    <script src="/js/firebase-config.js"></script>
+</head>
+<body class="bg-gray-100 dark:bg-dark-900 text-gray-800 dark:text-gray-200">
+    <div id="login-screen" class="min-h-screen flex items-center justify-center">
+        <div class="bg-white dark:bg-dark-800 p-8 rounded-xl shadow-2xl max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-6 text-center">Admin Login</h2>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="email" required 
+                           class="w-full px-4 py-2 rounded-lg border dark:bg-dark-700 dark:border-gray-600">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="password" required 
+                           class="w-full px-4 py-2 rounded-lg border dark:bg-dark-700 dark:border-gray-600">
+                </div>
+                <button type="submit" 
+                        class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 rounded-lg font-medium">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="admin-panel" class="hidden">
+        <!-- Sidebar -->
+        <div class="flex h-screen">
+            <div class="w-64 bg-dark-900 text-white">
+                <div class="p-6">
+                    <h1 class="text-xl font-bold">PowerPro Admin</h1>
+                    <p class="text-sm text-gray-400 mt-2">Dashboard</p>
+                </div>
+                <nav class="mt-6">
+                    <a href="#dashboard" class="admin-nav active block py-3 px-6 hover:bg-dark-800">
+                        <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                    </a>
+                    <a href="#services" class="admin-nav block py-3 px-6 hover:bg-dark-800">
+                        <i class="fas fa-bolt mr-3"></i> Services
+                    </a>
+                    <a href="#testimonials" class="admin-nav block py-3 px-6 hover:bg-dark-800">
+                        <i class="fas fa-star mr-3"></i> Testimonials
+                    </a>
+                    <a href="#partners" class="admin-nav block py-3 px-6 hover:bg-dark-800">
+                        <i class="fas fa-handshake mr-3"></i> Partners
+                    </a>
+                    <a href="#blog" class="admin-nav block py-3 px-6 hover:bg-dark-800">
+                        <i class="fas fa-blog mr-3"></i> Blog Posts
+                    </a>
+                    <a href="#contacts" class="admin-nav block py-3 px-6 hover:bg-dark-800">
+                        <i class="fas fa-envelope mr-3"></i> Contacts
+                    </a>
+                    <a href="#analytics" class="admin-nav block py-3 px-6 hover:bg-dark-800">
+                        <i class="fas fa-chart-bar mr-3"></i> Analytics
+                    </a>
+                    <a href="#ads" class="admin-nav block py-3 px-6 hover:bg-dark-800">
+                        <i class="fas fa-ad mr-3"></i> Ad Spaces
+                    </a>
+                    <button id="logout-btn" class="w-full text-left py-3 px-6 hover:bg-red-900 text-red-400">
+                        <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                    </button>
+                </nav>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="flex-1 overflow-auto p-8">
+                <!-- Dashboard Content will be loaded here -->
+                <div id="content-area"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/admin.js"></script>
+</body>
+</html>
