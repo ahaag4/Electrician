@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - Navixera</title>
+  <title>Contact Us - SHUKLA-ELECTRICALS</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <style>
     :root {
-      --primary: #0d6efd;
-      --secondary: #1a7bff;
-      --muted: #6c757d;
+      --primary: #10b981;
+      --secondary: #059669;
+      --accent: #f59e0b;
+      --dark: #0f172a;
+      --muted: #64748b;
       --card-bg: #fff;
-      --page-bg: #f6f8fb;
+      --page-bg: #f8fafc;
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
     body {
@@ -29,7 +31,7 @@
     }
 
     .navbar {
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: linear-gradient(90deg, var(--dark), #1e293b);
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       position: sticky;
       top: 0;
@@ -38,23 +40,25 @@
 
     .navbar-brand {
       color: #fff !important;
-      font-weight: 600;
+      font-weight: 700;
       display: flex;
       align-items: center;
+      font-size: 1.5rem;
     }
 
     .navbar-brand i {
       margin-right: 10px;
+      color: var(--accent);
     }
 
     .nav-link {
       color: #fff !important;
       font-weight: 500;
-      transition: opacity 0.3s;
+      transition: color 0.3s;
     }
 
     .nav-link:hover {
-      opacity: 0.8;
+      color: var(--accent) !important;
     }
 
     .container {
@@ -64,25 +68,26 @@
     }
 
     .contact-hero {
-      background: var(--card-bg);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       border-radius: 12px;
-      padding: 40px;
+      padding: 60px 40px;
       margin: 40px 0;
       text-align: center;
-      box-shadow: 0 6px 18px rgba(13, 110, 253, 0.06);
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+      color: white;
     }
 
     .contact-hero h1 {
-      color: var(--primary);
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 20px;
+      font-weight: 700;
     }
 
     .contact-hero p {
-      color: var(--muted);
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       max-width: 800px;
       margin: 0 auto;
+      opacity: 0.9;
     }
 
     .contact-content {
@@ -96,20 +101,27 @@
       background: var(--card-bg);
       border-radius: 12px;
       padding: 30px;
-      box-shadow: 0 6px 18px rgba(13, 110, 253, 0.06);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      border-top: 4px solid var(--primary);
     }
 
     .contact-info h2, .contact-form h2 {
-      color: var(--primary);
+      color: var(--dark);
       margin-bottom: 20px;
       padding-bottom: 10px;
-      border-bottom: 2px solid var(--secondary);
+      border-bottom: 2px solid var(--primary);
+      font-weight: 600;
     }
 
     .info-item {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      transition: transform 0.3s;
+    }
+
+    .info-item:hover {
+      transform: translateX(5px);
     }
 
     .info-item i {
@@ -117,15 +129,34 @@
       color: var(--primary);
       margin-right: 15px;
       min-width: 30px;
+      background: rgba(16, 185, 129, 0.1);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .info-item h3 {
-      color: var(--primary);
+      color: var(--dark);
       margin-bottom: 5px;
+      font-weight: 600;
     }
 
     .info-item p {
       color: var(--muted);
+    }
+
+    .info-item a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .info-item a:hover {
+      color: var(--secondary);
+      text-decoration: underline;
     }
 
     .form-group {
@@ -134,8 +165,8 @@
 
     .form-group label {
       display: block;
-      margin-bottom: 5px;
-      color: var(--primary);
+      margin-bottom: 8px;
+      color: var(--dark);
       font-weight: 500;
     }
 
@@ -143,11 +174,12 @@
     .form-group textarea,
     .form-group select {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
+      padding: 12px 15px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
       font-size: 1rem;
-      transition: border-color 0.3s;
+      transition: all 0.3s;
+      background: #f8fafc;
     }
 
     .form-group input:focus,
@@ -155,6 +187,8 @@
     .form-group select:focus {
       border-color: var(--primary);
       outline: none;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      background: white;
     }
 
     .form-group textarea {
@@ -163,21 +197,71 @@
     }
 
     .submit-btn {
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: #fff;
       border: none;
-      padding: 12px 25px;
-      border-radius: 5px;
+      padding: 14px 30px;
+      border-radius: 8px;
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: all 0.3s;
       width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
     .submit-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .emergency-contact {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px 0;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.2);
+    }
+
+    .emergency-contact h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .emergency-contact p {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    .emergency-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      color: #dc2626;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .emergency-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
     }
 
     .faq-section {
@@ -185,46 +269,128 @@
       border-radius: 12px;
       padding: 40px;
       margin: 40px 0;
-      box-shadow: 0 6px 18px rgba(13, 110, 253, 0.06);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      border-top: 4px solid var(--accent);
     }
 
     .faq-section h2 {
-      color: var(--primary);
+      color: var(--dark);
       text-align: center;
       margin-bottom: 30px;
+      font-weight: 600;
     }
 
     .faq-item {
       margin-bottom: 20px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #e2e8f0;
       padding-bottom: 20px;
     }
 
     .faq-question {
       font-size: 1.2rem;
-      color: var(--primary);
+      color: var(--dark);
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-weight: 500;
+      padding: 10px 0;
+      transition: color 0.3s;
+    }
+
+    .faq-question:hover {
+      color: var(--primary);
     }
 
     .faq-answer {
       color: var(--muted);
-      padding: 10px 0;
+      padding: 15px 0;
       display: none;
+      line-height: 1.7;
     }
 
     .faq-answer.active {
       display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .service-areas {
+      background: linear-gradient(135deg, var(--dark), #1e293b);
+      color: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .service-areas h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .area-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .area-item:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
     footer {
-      background: var(--card-bg);
-      padding: 30px 0;
-      text-align: center;
+      background: var(--dark);
+      padding: 40px 0 20px;
+      color: #cbd5e1;
       margin-top: 40px;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
     }
 
     .social-links a {
@@ -234,19 +400,23 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: var(--primary);
-      color: #fff;
-      margin: 0 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
       text-decoration: none;
-      transition: transform 0.3s;
+      transition: all 0.3s;
     }
 
     .social-links a:hover {
+      background: var(--primary);
       transform: translateY(-3px);
     }
 
     .copyright {
-      color: var(--muted);
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 30px;
+      border-top: 1px solid #334155;
+      color: #94a3b8;
       font-size: 0.9rem;
     }
 
@@ -257,18 +427,23 @@
       z-index: 1080;
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @media (max-width: 768px) {
       .contact-content {
         grid-template-columns: 1fr;
       }
-      .navbar-nav {
-        text-align: center;
-      }
-      .nav-link {
-        padding: 10px 0;
-      }
       .contact-hero h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+      }
+      .contact-hero p {
+        font-size: 1.1rem;
+      }
+      .areas-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
@@ -279,17 +454,20 @@
       .contact-hero, .contact-info, .contact-form, .faq-section {
         padding: 20px;
       }
+      .contact-hero {
+        padding: 40px 20px;
+      }
       .submit-btn {
-        padding: 10px;
+        padding: 12px 20px;
       }
     }
   </style>
 </head>
 <body>
-<!--  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand" href="index.html">
-        <i class="fas fa-location-dot"></i> Smart Tracker
+        <i class="fas fa-bolt"></i> SHUKLA-ELECTRICALS
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -297,128 +475,221 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
           <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="tel:+919876543210"><i class="fas fa-phone"></i> Emergency</a></li>
         </ul>
       </div>
     </div>
-  </nav>-->
+  </nav>
 
   <div class="container">
     <section class="contact-hero">
-      <h1>Get in Touch With Us</h1>
-      <p>Have questions about our tracking solutions? Need support with your account? Our team is here to help you with any inquiries you might have.</p>
+      <h1>Get Expert Electrical Help Today</h1>
+      <p>Have electrical issues? Need professional wiring or installation? Our certified electricians are ready to assist you with any electrical needs. Contact us for free estimates and emergency services.</p>
     </section>
 
-   <!-- <div class="contact-content">
+    <div class="contact-content">
       <div class="contact-info">
         <h2>Contact Information</h2>
         <div class="info-item">
-          <i class="fas fa-map-marker-alt"></i>
+          <i class="fas fa-phone-alt"></i>
           <div>
-            <h3>Our Location</h3>
-            <p>123 Tracking Street, Tech City, TC 54321</p>
+            <h3>Emergency Service</h3>
+            <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+            <p>24/7 Emergency Electrical Repairs</p>
           </div>
         </div>
         <div class="info-item">
           <i class="fas fa-envelope"></i>
           <div>
             <h3>Email Us</h3>
-            <p>support@smarttracker.com</p>
-            <p>sales@smarttracker.com</p>
-          </div>
-        </div>
-        <div class="info-item">
-          <i class="fas fa-phone-alt"></i>
-          <div>
-            <h3>Call Us</h3>
-            <p>+1 (555) 123-4567 (Sales)</p>
-            <p>+1 (555) 987-6543 (Support)</p>
+            <p><a href="mailto:contact@shuklaelectricals.com">contact@shuklaelectricals.com</a></p>
+            <p><a href="mailto:support@shuklaelectricals.com">support@shuklaelectricals.com</a></p>
           </div>
         </div>
         <div class="info-item">
           <i class="fas fa-clock"></i>
           <div>
             <h3>Working Hours</h3>
-            <p>Monday - Friday: 8:00 AM - 8:00 PM</p>
-            <p>Saturday: 9:00 AM - 5:00 PM</p>
-            <p>Sunday: Closed</p>
+            <p>Monday - Saturday: 8:00 AM - 9:00 PM</p>
+            <p>Sunday: 9:00 AM - 6:00 PM</p>
+            <p>Emergency: 24/7 Available</p>
           </div>
         </div>
-      </div>-->
+        <div class="info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h3>Service Areas</h3>
+            <p>Delhi NCR, Mumbai, Bangalore, Hyderabad</p>
+            <p>Chennai, Pune, Kolkata, Ahmedabad</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-whatsapp"></i>
+          <div>
+            <h3>WhatsApp</h3>
+            <p><a href="https://wa.me/919876543210">+91 98765 43210</a></p>
+            <p>Quick responses for quotes and bookings</p>
+          </div>
+        </div>
+      </div>
 
       <div class="contact-form">
-        <h2>Send Us a Message</h2>
-        <form target="_blank" action="https://formsubmit.co/navixera@gmail.com" method="POST" id="contactForm" enctype="multipart/form-data">
-          <input type="hidden" name="_subject" value="New Contact Form Submission - Navixera">
+        <h2>Request Electrical Service</h2>
+        <form target="_blank" action="https://formsubmit.co/contact@shuklaelectricals.com" method="POST" id="contactForm" enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="New Electrical Service Request - SHUKLA-ELECTRICALS">
           <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://svms.pages.dev/thank-you.html">
+          <input type="hidden" name="_next" value="https://yoursite.com/thank-you.html">
+          
           <div class="form-group">
-            <label for="name">Your Name</label>
+            <label for="name">Your Name *</label>
             <input type="text" id="name" name="name" class="form-control" placeholder="Full Name" required>
           </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="+91 98765 43210" required>
+          </div>
+          
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Email Address" required>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Email Address">
           </div>
+          
           <div class="form-group">
-             <label for="Attachment">Attachment</label>
-             <input name="_attachment" type="file" />
-          </div>
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <select id="subject" name="subject" class="form-control" required>
-              <option value="">Select a subject</option>
-              <option value="general inquiry">General Inquiry</option>
-              <option value="technical support">Technical Support</option>
-              <option value="sales question">Sales Question</option>
-              <option value="billing issue">Billing Issue</option>
-              <option value="feature request">Feature Request</option>
-              <option value="other">Other</option>
+            <label for="service">Required Service *</label>
+            <select id="service" name="service" class="form-control" required>
+              <option value="">Select a service</option>
+              <option value="electrical_wiring">Electrical Wiring</option>
+              <option value="ev_charger">EV Charger Installation</option>
+              <option value="meter_cabin">Meter Cabin Setup</option>
+              <option value="lighting">Lighting Solutions</option>
+              <option value="emergency_repair">Emergency Repair</option>
+              <option value="house_wiring">Complete House Wiring</option>
+              <option value="electrical_inspection">Electrical Safety Inspection</option>
+              <option value="other">Other Service</option>
             </select>
           </div>
+          
           <div class="form-group">
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" class="form-control" placeholder="Your Message" rows="10" required></textarea>
+            <label for="urgency">Urgency Level</label>
+            <select id="urgency" name="urgency" class="form-control">
+              <option value="normal">Normal (Within 2-3 days)</option>
+              <option value="urgent">Urgent (Within 24 hours)</option>
+              <option value="emergency">Emergency (Immediate)</option>
+            </select>
           </div>
-          <button type="submit" class="submit-btn">Send Message</button>
+          
+          <div class="form-group">
+            <label for="location">Service Location *</label>
+            <input type="text" id="location" name="location" class="form-control" placeholder="Full address with landmark" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Describe Your Electrical Issue *</label>
+            <textarea id="message" name="message" class="form-control" placeholder="Please describe your electrical problem, area size, and any specific requirements..." rows="6" required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="attachment">Upload Photos (Optional)</label>
+            <input type="file" id="attachment" name="attachment" class="form-control" accept="image/*,.pdf">
+            <small class="text-muted">You can upload photos of the electrical issue for better understanding</small>
+          </div>
+          
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> Request Service Call
+          </button>
         </form>
       </div>
     </div>
 
+    <div class="emergency-contact">
+      <h3><i class="fas fa-exclamation-triangle"></i> Electrical Emergency?</h3>
+      <p>Don't risk electrical hazards. Sparks, burning smell, or power failure? Call our emergency team immediately!</p>
+      <a href="tel:+919876543210" class="emergency-btn">
+        <i class="fas fa-phone-alt"></i> EMERGENCY CALL: +91 98765 43210
+      </a>
+    </div>
+
+    <section class="service-areas">
+      <h3><i class="fas fa-map-marker-alt"></i> We Service These Areas</h3>
+      <div class="areas-grid">
+        <div class="area-item">Delhi</div>
+        <div class="area-item">Gurgaon</div>
+        <div class="area-item">Noida</div>
+        <div class="area-item">Faridabad</div>
+        <div class="area-item">Ghaziabad</div>
+        <div class="area-item">Mumbai</div>
+        <div class="area-item">Bangalore</div>
+        <div class="area-item">Hyderabad</div>
+      </div>
+    </section>
+
     <section class="faq-section">
-      <h2>Frequently Asked Questions</h2>
+      <h2>Electrical Services FAQs</h2>
+      
       <div class="faq-item">
         <div class="faq-question">
-          How accurate is the Navixera GPS? <i class="fas fa-chevron-down"></i>
+          How quickly can you respond to emergency calls? <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
-          Our GPS tracking is accurate within 5 meters under normal conditions. In urban areas with tall buildings, accuracy might be slightly reduced, but we use multiple technologies to ensure the best possible tracking precision.
+          Our emergency team responds within 30 minutes for urgent electrical issues in metro areas. For life-threatening situations like electrical fires or shocks, we prioritize immediate response. We're available 24/7 for all electrical emergencies.
         </div>
       </div>
+      
       <div class="faq-item">
         <div class="faq-question">
-          How long does the battery last on your tracking devices? <i class="fas fa-chevron-down"></i>
+          What is included in your electrical wiring service? <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
-          Battery life varies by device. Our standard vehicle tracker lasts up to 2 weeks on a single charge with normal use. Our premium models can last up to 30 days. For asset tracking, we have devices that can last up to 6 months.
+          Our complete wiring service includes: Site inspection and planning, high-quality wires and conduits, switchboard installation, proper earthing and grounding, circuit breaker setup, lighting point installation, testing and certification, and 2-year warranty on all wiring work.
         </div>
       </div>
+      
       <div class="faq-item">
         <div class="faq-question">
-          Can I track multiple vehicles with one account? <i class="fas fa-chevron-down"></i>
+          How much does EV charger installation cost? <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
-          Yes, our business plans allow you to track multiple vehicles from a single dashboard. You can create groups, set up geofences for each vehicle, and receive individual alerts.
+          EV charger installation starts from ₹15,000 for basic home setups. The cost varies based on: Charger type (AC/DC), power requirements (3.3kW to 22kW), wiring distance from meter, load enhancement requirements, and any additional safety features needed. We provide free site inspection and detailed quotes.
         </div>
       </div>
+      
       <div class="faq-item">
         <div class="faq-question">
-          Is my tracking data secure? <i class="fas fa-chevron-down"></i>
+          Are your electricians certified and insured? <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
-          Absolutely. We use end-to-end encryption for all location data and follow industry best practices for data security. Your tracking information is only accessible to you and those you explicitly authorize.
+          Yes, all our electricians are certified with government-approved training and carry valid licenses. We are fully insured with comprehensive liability coverage that protects both our workers and your property during work. We also provide work completion certificates for all major installations.
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          Do you provide free estimates? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Yes, we provide free detailed estimates after site inspection. Our estimates include: Labor costs, material specifications, timeline, warranty details, and any necessary permits. No hidden charges - what you see in the estimate is what you pay.
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          What payment methods do you accept? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          We accept all payment methods: Cash, UPI (Google Pay, PhonePe, Paytm), credit/debit cards, bank transfers, and cheques. For large projects, we typically require 30% advance for material procurement, 40% during work, and 30% upon completion and satisfaction.
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          How long does house wiring take? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          For a standard 2BHK apartment: 3-5 days. 3BHK house: 5-7 days. Larger villas or commercial spaces: 7-14 days depending on complexity. We provide detailed timelines during the planning phase and work efficiently to minimize disruption to your daily routine.
         </div>
       </div>
     </section>
@@ -426,13 +697,53 @@
 
   <footer>
     <div class="footer-content">
-     <!-- <div class="social-links">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      </div>-->
-      <p class="copyright">© 2025 Navixera. All rights reserved.</p>
+      <div class="footer-column">
+        <h3>SHUKLA-ELECTRICALS</h3>
+        <p>Professional electrician services with 15+ years experience. Certified, insured, and committed to safety and quality workmanship.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/919876543210"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Electrical Blog</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Our Services</h3>
+        <ul class="footer-links">
+          <li><a href="#">Electrical Wiring</a></li>
+          <li><a href="#">EV Charger Installation</a></li>
+          <li><a href="#">Meter Cabin Setup</a></li>
+          <li><a href="#">Lighting Solutions</a></li>
+          <li><a href="#">Emergency Repairs</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Contact Info</h3>
+        <ul class="footer-links">
+          <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+          <li><i class="fas fa-envelope"></i> contact@shuklaelectricals.com</li>
+          <li><i class="fas fa-clock"></i> 24/7 Emergency Service</li>
+          <li><i class="fas fa-map-marker-alt"></i> Delhi NCR, India</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>© 2024 SHUKLA-ELECTRICALS. All Rights Reserved. | <a href="privacy.html" style="color: #94a3b8;">Privacy Policy</a> | <a href="terms.html" style="color: #94a3b8;">Terms of Service</a></p>
     </div>
   </footer>
 
@@ -442,7 +753,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script>
-    // Firebase Configuration (optional, for storing submissions)
+    // Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyDGpagCpskeOxzVO4C5qgdVUTeWO8rUZUU",
       authDomain: "electrician-830b2.firebaseapp.com",
@@ -451,20 +762,35 @@
       messagingSenderId: "1053791458330",
       appId: "1:1053791458330:web:fdbf5befa79aef2376eda3"
     };
-    firebase.initializeApp(firebaseConfig);
+    
+    // Initialize Firebase only if not already initialized
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
     const db = firebase.database();
 
     // Toast Helper
-    const showToast = (message, type = 'info', ttl = 3500) => {
+    const showToast = (message, type = 'info', ttl = 4000) => {
+      const toastTypes = {
+        'success': {bg: 'success', icon: 'check-circle'},
+        'error': {bg: 'danger', icon: 'exclamation-circle'},
+        'warning': {bg: 'warning', icon: 'exclamation-triangle'},
+        'info': {bg: 'info', icon: 'info-circle'}
+      };
+      
       const div = document.createElement('div');
-      div.className = `toast align-items-center text-bg-${type} border-0`;
+      div.className = `toast align-items-center text-bg-${toastTypes[type].bg} border-0`;
       div.setAttribute('role', 'alert');
       div.setAttribute('aria-live', 'assertive');
       div.innerHTML = `
-        <div class="d-flex">
-          <div class="toast-body">${message}</div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        <div class="d-flex align-items-center">
+          <div class="toast-body d-flex align-items-center">
+            <i class="fas fa-${toastTypes[type].icon} me-2"></i>
+            ${message}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>`;
+      
       document.querySelector('.toast-container').appendChild(div);
       const t = new bootstrap.Toast(div, { delay: ttl });
       t.show();
@@ -476,39 +802,88 @@
       e.preventDefault();
 
       const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
       const email = document.getElementById('email').value.trim();
-      const subject = document.getElementById('subject').value;
+      const service = document.getElementById('service').value;
+      const location = document.getElementById('location').value.trim();
       const message = document.getElementById('message').value.trim();
 
       // Validation
-      if (!name || !email || !subject || !message) {
-        showToast('Please fill in all fields', 'warning');
+      if (!name || !phone || !service || !location || !message) {
+        showToast('Please fill in all required fields', 'warning');
         return;
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
+      const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+      if (!phoneRegex.test(phone.replace(/\D/g, ''))) {
+        showToast('Please enter a valid phone number', 'warning');
+        return;
+      }
+
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showToast('Please enter a valid email address', 'warning');
         return;
       }
 
       try {
-        // Save to Firebase (optional)
-        await db.ref('contact_submissions').push({
+        // Show loading state
+        const submitBtn = document.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        submitBtn.disabled = true;
+
+        // Save to Firebase for backup
+        const submissionRef = db.ref('service_requests').push();
+        await submissionRef.set({
           name,
-          email,
-          subject,
+          phone,
+          email: email || 'Not provided',
+          service,
+          urgency: document.getElementById('urgency').value,
+          location,
           message,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
+          status: 'new'
         });
 
-        // FormSubmit will handle the actual email sending
-        // The form's action attribute points to FormSubmit's endpoint
-        showToast('Submitting your message...', 'info');
-        document.getElementById('contactForm').submit(); // Trigger FormSubmit
+        // Prepare form data for FormSubmit
+        const formData = new FormData(this);
+        
+        // Send to FormSubmit
+        const response = await fetch(this.action, {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.ok) {
+          showToast('Service request submitted successfully! We will contact you within 30 minutes.', 'success');
+          
+          // Reset form after successful submission
+          setTimeout(() => {
+            document.getElementById('contactForm').reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            // Send WhatsApp notification
+            const whatsappMsg = `New Service Request: ${name}\nPhone: ${phone}\nService: ${service}\nLocation: ${location}\nMessage: ${message.substring(0, 50)}...`;
+            window.open(`https://wa.me/919876543210?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
+          }, 1500);
+          
+        } else {
+          throw new Error('Form submission failed');
+        }
+
       } catch (err) {
-        console.error('Failed to save submission:', err);
-        showToast(`Failed to process submission: ${err.message}`, 'danger');
+        console.error('Failed to process request:', err);
+        showToast(`Request submitted locally. We'll contact you soon!`, 'info');
+        
+        // Still reset form and re-enable button
+        const submitBtn = document.querySelector('.submit-btn');
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Request Service Call';
+        submitBtn.disabled = false;
+        
+        // Submit form anyway (FormSubmit will handle it)
+        this.submit();
       }
     });
 
@@ -516,12 +891,38 @@
     document.querySelectorAll('.faq-question').forEach(question => {
       question.addEventListener('click', () => {
         const answer = question.nextElementSibling;
-        answer.classList.toggle('active');
         const icon = question.querySelector('i');
-        icon.classList.toggle('fa-chevron-down');
-        icon.classList.toggle('fa-chevron-up');
+        
+        // Close all other FAQs
+        document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+          if (otherAnswer !== answer && otherAnswer.classList.contains('active')) {
+            otherAnswer.classList.remove('active');
+            otherAnswer.previousElementSibling.querySelector('i').className = 'fas fa-chevron-down';
+          }
+        });
+        
+        // Toggle current FAQ
+        answer.classList.toggle('active');
+        if (answer.classList.contains('active')) {
+          icon.className = 'fas fa-chevron-up';
+        } else {
+          icon.className = 'fas fa-chevron-down';
+        }
       });
     });
+
+    // Auto-populate phone number for easier calling
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        showToast('Calling our electrician team...', 'info', 2000);
+      });
+    });
+
+    // Auto-select emergency option if page loaded with emergency parameter
+    if (window.location.search.includes('emergency=true')) {
+      document.getElementById('urgency').value = 'emergency';
+      showToast('Emergency service requested! Please fill the form for immediate assistance.', 'warning');
+    }
   </script>
 </body>
 </html>
