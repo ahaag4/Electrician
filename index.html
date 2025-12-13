@@ -1,1127 +1,860 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="google-adsense-account" content="ca-pub-5601993574314165">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Expert electrician services: wiring, meter cabins, EV chargers, lighting, emergency repairs. Certified electricians available 24/7. Book now!">
-    <title>Professional Electrician Services - Wiring, EV Chargers, Emergency Repairs</title>
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <link rel="icon" type="image/png" href="https://img.icons8.com/color/96/000000/electricity.png">
-    
-    <script>
-        // Auto Dark Mode Detection
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark-mode');
-        }
-    </script>
-    
-    <style>
-        /* General Styles */
-        :root {
-            --primary-color: #10b981;
-            --secondary-color: #3b82f6;
-            --accent-color: #f59e0b;
-            --dark-color: #1e293b;
-            --light-color: #f8fafc;
-            --text-dark: #334155;
-            --text-light: #64748b;
-        }
-        
-        body {
-            font-family: 'Inter', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: var(--light-color);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-        
-        .dark-mode {
-            background: #0f172a;
-            color: #e2e8f0;
-        }
-        
-        .dark-mode .hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
-        }
-        
-        .dark-mode .service-box, 
-        .dark-mode .panel,
-        .dark-mode .testimonials {
-            background: #1e293b;
-            color: #e2e8f0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        
-        .dark-mode .footer {
-            background: #0f172a;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header Styles */
-        .header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .dark-mode .header {
-            background: #1e293b;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--dark-color);
-        }
-        
-        .dark-mode .logo {
-            color: white;
-        }
-        
-        .logo i {
-            color: var(--accent-color);
-            font-size: 28px;
-        }
-        
-        .logo-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-        }
-        
-        .logo-text span {
-            color: var(--primary-color);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .dark-mode .nav-links a {
-            color: #e2e8f0;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--text-dark);
-            cursor: pointer;
-        }
-        
-        .dark-mode .mobile-menu-btn {
-            color: #e2e8f0;
-        }
-        
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            background: linear-gradient(rgba(30, 41, 59, 0.9), rgba(30, 41, 59, 0.8)), url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
-            padding: 100px 20px;
-            color: white;
-        }
-        
-        .hero h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3em;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0.9;
-        }
-        
-        .btn {
-            padding: 14px 32px;
-            background: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 600;
-            border-radius: 8px;
-            display: inline-block;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background: #0da271;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
-        }
-        
-        .btn-secondary {
-            background: var(--secondary-color);
-            margin-left: 15px;
-        }
-        
-        .btn-secondary:hover {
-            background: #2563eb;
-            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
-        }
-        
-        /* Services Section */
-        .services-section {
-            padding: 80px 20px;
-            background: white;
-        }
-        
-        .dark-mode .services-section {
-            background: #0f172a;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5em;
-            font-weight: 700;
-            margin-bottom: 50px;
-            color: var(--dark-color);
-        }
-        
-        .dark-mode .section-title {
-            color: #e2e8f0;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .service-box {
-            text-align: center;
-            background: white;
-            padding: 30px 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            border-top: 4px solid var(--primary-color);
-        }
-        
-        .service-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-        }
-        
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-        
-        .service-icon i {
-            font-size: 30px;
-            color: white;
-        }
-        
-        .service-box h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            color: var(--dark-color);
-        }
-        
-        .dark-mode .service-box h3 {
-            color: #e2e8f0;
-        }
-        
-        .service-box p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-            font-size: 0.95em;
-        }
-        
-        .service-price {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        /* Why Choose Us Section */
-        .why-us {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-        }
-        
-        .dark-mode .why-us {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .feature {
-            text-align: center;
-            padding: 30px;
-        }
-        
-        .feature i {
-            font-size: 40px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-        
-        .feature h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            padding: 80px 20px;
-            background: white;
-            text-align: center;
-        }
-        
-        .dark-mode .testimonials {
-            background: #0f172a;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .testimonial-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            text-align: left;
-        }
-        
-        .dark-mode .testimonial-card {
-            background: #1e293b;
-        }
-        
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .stars {
-            color: #fbbf24;
-            font-size: 18px;
-            margin: 10px 0;
-        }
-        
-        /* FAQ Section */
-        .faq-section {
-            padding: 80px 20px;
-            background: #f8fafc;
-        }
-        
-        .dark-mode .faq-section {
-            background: #1e293b;
-        }
-        
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .accordion {
-            background-color: white;
-            color: var(--text-dark);
-            cursor: pointer;
-            padding: 18px 20px;
-            width: 100%;
-            text-align: left;
-            border: none;
-            outline: none;
-            transition: 0.4s;
-            font-size: 1.1em;
-            font-weight: 600;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .dark-mode .accordion {
-            background-color: #334155;
-            color: #e2e8f0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        
-        .active, .accordion:hover {
-            background-color: #f1f5f9;
-        }
-        
-        .dark-mode .active, 
-        .dark-mode .accordion:hover {
-            background-color: #475569;
-        }
-        
-        .accordion:after {
-            content: '\002B';
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-        
-        .active:after {
-            content: "\2212";
-        }
-        
-        .panel {
-            padding: 0 20px;
-            background-color: white;
-            display: none;
-            overflow: hidden;
-            border-radius: 0 0 8px 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        
-        .dark-mode .panel {
-            background-color: #334155;
-        }
-        
-        .panel p {
-            padding: 20px 0;
-            margin: 0;
-            color: var(--text-light);
-        }
-        
-        .dark-mode .panel p {
-            color: #cbd5e1;
-        }
-        
-        /* Emergency Banner */
-        .emergency-banner {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            margin: 40px 0;
-            border-radius: 12px;
-        }
-        
-        .emergency-banner h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2em;
-            margin-bottom: 15px;
-        }
-        
-        .emergency-btn {
-            background: white;
-            color: #dc2626;
-            padding: 12px 30px;
-            font-size: 1.1em;
-            font-weight: 600;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-            transition: all 0.3s;
-        }
-        
-        .emergency-btn:hover {
-            background: #f8fafc;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--dark-color);
-            color: white;
-            padding: 60px 20px 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-color);
-        }
-        
-        .contact-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            color: #cbd5e1;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #334155;
-            color: #94a3b8;
-            font-size: 0.9em;
-        }
-        
-        /* WhatsApp Chat */
-        .whatsapp {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            color: white;
-            padding: 15px;
-            border-radius: 50%;
-            text-decoration: none;
-            font-size: 24px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-        }
-        
-        .whatsapp:hover {
-            background: #128C7E;
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
-        }
-        
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: var(--dark-color);
-            color: white;
-            padding: 12px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            font-size: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            z-index: 1000;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2em;
-            }
-            
-            .hero p {
-                font-size: 1.1em;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            }
-            
-            .dark-mode .nav-links {
-                background: #1e293b;
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .btn-secondary {
-                margin-left: 0;
-                margin-top: 15px;
-                display: block;
-            }
-            
-            .whatsapp, .theme-toggle {
-                bottom: 20px;
-                right: 20px;
-                left: auto;
-            }
-            
-            .theme-toggle {
-                left: 20px;
-                right: auto;
-            }
-        }
-        
-        /* Animation for service boxes */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .service-box {
-            animation: fadeInUp 0.5s ease-out forwards;
-        }
-        
-        .service-box:nth-child(2) { animation-delay: 0.1s; }
-        .service-box:nth-child(3) { animation-delay: 0.2s; }
-        .service-box:nth-child(4) { animation-delay: 0.3s; }
-        .service-box:nth-child(5) { animation-delay: 0.4s; }
-        .service-box:nth-child(6) { animation-delay: 0.5s; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Professional electrician services: wiring, EV chargers, lighting, meter cabins, emergency repairs. Certified electricians 24/7.">
+  <title>SHUKLA ELECTRICALS - Professional Electrician Services</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: 'Segoe UI', system-ui, sans-serif; 
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .logo-icon {
+      font-size: 2.2rem;
+      color: #fbbf24;
+      animation: pulse 2s infinite;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .logo-text span {
+      color: #fbbf24;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: #fbbf24;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #fbbf24;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .emergency-btn {
+      background: #ef4444;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+
+    .emergency-btn:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)), 
+                  url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .hero-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #fbbf24;
+      color: #1e293b;
+      box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: #f59e0b;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(251, 191, 36, 0.4);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1e3a8a;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Services Section */
+    .services {
+      padding: 5rem 2rem;
+      background: white;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      width: 80px;
+      height: 4px;
+      background: #fbbf24;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border-top: 4px solid #2563eb;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .service-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      color: white;
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #1e293b;
+    }
+
+    .service-card p {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #059669;
+      margin-bottom: 1rem;
+    }
+
+    /* Why Choose Us */
+    .why-us {
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+    }
+
+    .feature {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .feature i {
+      font-size: 2.5rem;
+      color: #2563eb;
+      margin-bottom: 1rem;
+    }
+
+    .feature h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #1e293b;
+    }
+
+    .feature p {
+      color: #64748b;
+    }
+
+    /* Contact Banner */
+    .contact-banner {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 3rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(30, 58, 138, 0.3);
+    }
+
+    .contact-banner h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.1rem;
+    }
+
+    .contact-item i {
+      color: #fbbf24;
+      font-size: 1.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #1e293b;
+      color: white;
+      padding: 4rem 2rem 2rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-column h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: #fbbf24;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #fbbf24;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: #334155;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: #fbbf24;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #334155;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    /* WhatsApp Float */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      background: #128C7E;
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1e3a8a;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Stats Counter */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      margin: 3rem auto;
+      max-width: 800px;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2563eb;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">
-                    <i class="fas fa-bolt"></i>
-                    <div class="logo-text">Power<span>Pro</span></div>
-                </a>
-                
-                <div class="nav-links" id="navLinks">
-                    <a href="#home">Home</a>
-                    <a href="#services">Services</a>
-                    <a href="#about">About</a>
-                    <a href="#testimonials">Reviews</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="contact.html" class="btn" style="padding: 10px 20px;">Contact</a>
-                </div>
-                
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-bolt"></i>
         </div>
-    </header>
+        <div class="logo-text">SHUKLA <span>ELECTRICALS</span></div>
+      </a>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Expert Electrician Services 24/7</h1>
-            <p>Professional wiring, meter cabin installation, EV chargers, lighting solutions, and emergency electrical repairs. Certified electricians serving your area with guaranteed quality work.</p>
-            <div>
-                <a href="tel:+919876543210" class="btn">
-                    <i class="fas fa-phone"></i> Call Now: +91 98765 43210
-                </a>
-                <a href="https://wa.me/919876543210" class="btn btn-secondary">
-                    <i class="fab fa-whatsapp"></i> WhatsApp Us
-                </a>
-            </div>
-        </div>
-    </section>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#why-us">Why Choose Us</a>
+        <a href="#contact">Contact</a>
+        <a href="tel:+919876543210" class="emergency-btn">
+          <i class="fas fa-phone"></i> Emergency Call
+        </a>
+      </nav>
 
-    <!-- Services Section -->
-    <section class="services-section" id="services">
-        <div class="container">
-            <h2 class="section-title">Our Electrical Services</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px; color: var(--text-light);">
-                Comprehensive electrical solutions for homes, offices, and industries with 100% safety compliance
-            </p>
-            
-            <div class="services-grid">
-                <div class="service-box">
-                    <div class="service-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Electrical Wiring</h3>
-                    <p>Complete house wiring, office wiring, and industrial electrical installations with safety certification.</p>
-                    <div class="service-price">From ₹25/sq.ft.</div>
-                    <a href="tel:+919876543210" class="btn" style="padding: 10px 20px;">Book Now</a>
-                </div>
-                
-                <div class="service-box">
-                    <div class="service-icon">
-                        <i class="fas fa-charging-station"></i>
-                    </div>
-                    <h3>EV Charger Installation</h3>
-                    <p>Home and commercial EV charging stations with proper load calculation and safety measures.</p>
-                    <div class="service-price">From ₹15,000</div>
-                    <a href="tel:+919876543210" class="btn" style="padding: 10px 20px;">Book Now</a>
-                </div>
-                
-                <div class="service-box">
-                    <div class="service-icon">
-                        <i class="fas fa-tachometer-alt"></i>
-                    </div>
-                    <h3>Meter Cabin Installation</h3>
-                    <p>Complete meter cabin setup with MCBs, safety switches, and proper earthing system.</p>
-                    <div class="service-price">From ₹8,000</div>
-                    <a href="tel:+919876543210" class="btn" style="padding: 10px 20px;">Book Now</a>
-                </div>
-                
-                <div class="service-box">
-                    <div class="service-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3>Lighting Solutions</h3>
-                    <p>LED lighting installation, decorative lights, false ceiling lights, and outdoor lighting.</p>
-                    <div class="service-price">From ₹2,500</div>
-                    <a href="tel:+919876543210" class="btn" style="padding: 10px 20px;">Book Now</a>
-                </div>
-                
-                <div class="service-box">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h3>Electrical Repairs</h3>
-                    <p>Fault finding, short circuit repairs, switchboard repairs, and electrical troubleshooting.</p>
-                    <div class="service-price">From ₹500</div>
-                    <a href="tel:+919876543210" class="btn" style="padding: 10px 20px;">Book Now</a>
-                </div>
-                
-                <div class="service-box">
-                    <div class="service-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <h3>Emergency Services</h3>
-                    <p>24/7 emergency electrical services for power failures, sparks, and urgent repairs.</p>
-                    <div class="service-price">Emergency Call</div>
-                    <a href="tel:+919876543210" class="btn" style="padding: 10px 20px; background: #ef4444;">Emergency Call</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section class="why-us" id="about">
-        <div class="container">
-            <h2 class="section-title">Why Choose PowerPro?</h2>
-            <div class="features">
-                <div class="feature">
-                    <i class="fas fa-certificate"></i>
-                    <h3>Certified Electricians</h3>
-                    <p>All our electricians are certified and undergo regular training for latest safety standards.</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-clock"></i>
-                    <h3>24/7 Availability</h3>
-                    <p>Round-the-clock services including weekends and holidays for emergency situations.</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Safety Guaranteed</h3>
-                    <p>100% compliance with electrical safety standards and proper insulation testing.</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-rupee-sign"></i>
-                    <h3>Transparent Pricing</h3>
-                    <p>No hidden charges. Get detailed quotes before work begins.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Emergency Banner -->
-    <div class="container">
-        <div class="emergency-banner">
-            <h2><i class="fas fa-exclamation-circle"></i> Electrical Emergency?</h2>
-            <p>Don't risk electrical hazards. Our emergency team responds within 30 minutes.</p>
-            <a href="tel:+919876543210" class="emergency-btn">
-                <i class="fas fa-phone"></i> Call Emergency: +91 98765 43210
-            </a>
-        </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
+  </header>
 
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <h2 class="section-title">Customer Reviews</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">R</div>
-                        <div>
-                            <h3>Rajesh Kumar</h3>
-                            <p>Residential Wiring</p>
-                        </div>
-                    </div>
-                    <div class="stars">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-                    <p>"Excellent service! The electrician arrived on time, completed full house wiring with proper safety measures. Highly recommended!"</p>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">P</div>
-                        <div>
-                            <h3>Priya Sharma</h3>
-                            <p>EV Charger Installation</p>
-                        </div>
-                    </div>
-                    <div class="stars">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-                    <p>"Professional EV charger installation for my Tesla. They handled all the load calculations and safety certifications. Great work!"</p>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">A</div>
-                        <div>
-                            <h3>Amit Patel</h3>
-                            <p>Emergency Repair</p>
-                        </div>
-                    </div>
-                    <div class="stars">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-                    <p>"Called at midnight for emergency electrical repair. Team arrived in 25 minutes and fixed the issue. Lifesavers!"</p>
-                </div>
-            </div>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-container">
+      <h1>Professional Electrical Services 24/7</h1>
+      <p>Certified electricians for wiring, meter cabins, EV chargers, lighting solutions, and emergency repairs. Serving with quality and safety for over 15 years.</p>
+      
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">2000+</div>
+          <div class="stat-label">Projects Completed</div>
         </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section" id="faq">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <button class="accordion">How quickly can you respond to emergency calls?</button>
-                <div class="panel">
-                    <p>We guarantee response within 30 minutes for emergency calls in metro areas. Our emergency team is available 24/7 including weekends and holidays.</p>
-                </div>
-
-                <button class="accordion">Are your electricians certified and insured?</button>
-                <div class="panel">
-                    <p>Yes, all our electricians are certified with government-approved training. We carry comprehensive insurance covering both our workers and your property during work.</p>
-                </div>
-
-                <button class="accordion">Do you provide free estimates?</button>
-                <div class="panel">
-                    <p>Yes, we provide free detailed estimates after site inspection. The estimate includes labor, materials, and any necessary permits.</p>
-                </div>
-
-                <button class="accordion">What areas do you serve?</button>
-                <div class="panel">
-                    <p>We serve Delhi NCR, Mumbai, Bangalore, Hyderabad, Chennai, Pune, and Kolkata. Contact us to check availability in your specific location.</p>
-                </div>
-
-                <button class="accordion">How much does electrical wiring cost?</button>
-                <div class="panel">
-                    <p>Residential wiring starts from ₹25/sq.ft. depending on wire quality, switches, and complexity. Commercial wiring costs vary based on load requirements.</p>
-                </div>
-
-                <button class="accordion">Do you offer warranty on electrical work?</button>
-                <div class="panel">
-                    <p>Yes, we offer 2 years warranty on all electrical installations and 1 year on repairs. Warranty details are provided in the service contract.</p>
-                </div>
-
-                <button class="accordion">Can you install EV chargers at apartments?</button>
-                <div class="panel">
-                    <p>Yes, we specialize in EV charger installations for apartments with proper load management solutions and society approval assistance.</p>
-                </div>
-
-                <button class="accordion">What payment methods do you accept?</button>
-                <div class="panel">
-                    <p>We accept cash, UPI, credit/debit cards, bank transfers, and all major digital payment methods. 50% advance payment for material procurement.</p>
-                </div>
-
-                <button class="accordion">Do you handle electrical work for new construction?</button>
-                <div class="panel">
-                    <p>Yes, we provide complete electrical solutions for new construction including planning, wiring, fitting, and final testing as per building codes.</p>
-                </div>
-
-                <button class="accordion">How can I book a service?</button>
-                <div class="panel">
-                    <p>You can book through our website, call us directly at +91 98765 43210, or WhatsApp us. We'll schedule a convenient time for service.</p>
-                </div>
-            </div>
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Emergency Service</div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>PowerPro Electricians</h3>
-                    <p>Professional electrical services with 10+ years experience. Certified, insured, and committed to safety and quality.</p>
-                    <div class="contact-info">
-                        <i class="fas fa-phone"></i>
-                        <span>+91 98765 43210</span>
-                    </div>
-                    <div class="contact-info">
-                        <i class="fas fa-envelope"></i>
-                        <span>contact@powerpro.com</span>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Electrical Wiring</a></li>
-                        <li><a href="#">EV Charger Installation</a></li>
-                        <li><a href="#">Meter Cabin Setup</a></li>
-                        <li><a href="#">Lighting Solutions</a></li>
-                        <li><a href="#">Electrical Repairs</a></li>
-                        <li><a href="#">Emergency Services</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Service Areas</h3>
-                    <ul class="footer-links">
-                        <li>Delhi & NCR</li>
-                        <li>Mumbai</li>
-                        <li>Bangalore</li>
-                        <li>Hyderabad</li>
-                        <li>Chennai</li>
-                        <li>Pune</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 PowerPro Electricians. All Rights Reserved. | <a href="privacy.html" style="color: #94a3b8;">Privacy Policy</a> | <a href="terms.html" style="color: #94a3b8;">Terms of Service</a></p>
-            </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Safety Record</div>
         </div>
-    </footer>
+        <div class="stat-item">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/919876543210" class="whatsapp" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+      <div class="hero-buttons">
+        <a href="tel:+919876543210" class="btn btn-primary">
+          <i class="fas fa-phone"></i> Call Now: +91 98765 43210
+        </a>
+        <a href="https://wa.me/919876543210" class="btn btn-secondary">
+          <i class="fab fa-whatsapp"></i> WhatsApp Us
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-
-        // FAQ Accordion
-        const accordions = document.getElementsByClassName("accordion");
-        
-        for (let i = 0; i < accordions.length; i++) {
-            accordions[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                const panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
-            });
-        }
-
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        themeToggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark-mode');
-            
-            if (document.documentElement.classList.contains('dark-mode')) {
-                themeIcon.className = 'fas fa-sun';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeIcon.className = 'fas fa-moon';
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // Check saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-            themeIcon.className = 'fas fa-sun';
-        }
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.navbar') && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe service boxes for animation
-        document.querySelectorAll('.service-box').forEach(box => {
-            box.style.opacity = '0';
-            box.style.transform = 'translateY(30px)';
-            box.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(box);
-        });
-    </script>
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <h2 class="section-title">Our Electrical Services</h2>
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5601993574314165" crossorigin="anonymous"></script>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3>Electrical Wiring</h3>
+        <p>Complete house wiring, office wiring, and industrial electrical installations with ISI certified materials.</p>
+        <div class="service-price">From ₹25/sq.ft.</div>
+        <a href="tel:+919876543210" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">
+          Book Now
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-charging-station"></i>
+        </div>
+        <h3>EV Charger Installation</h3>
+        <p>Home and commercial EV charging stations with proper load calculation and safety measures.</p>
+        <div class="service-price">From ₹15,000</div>
+        <a href="tel:+919876543210" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">
+          Book Now
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-tachometer-alt"></i>
+        </div>
+        <h3>Meter Cabin Setup</h3>
+        <p>Complete meter cabin installation with MCBs, safety switches, and proper earthing system.</p>
+        <div class="service-price">From ₹8,000</div>
+        <a href="tel:+919876543210" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">
+          Book Now
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3>Lighting Solutions</h3>
+        <p>LED lighting installation, decorative lights, false ceiling lights, and outdoor lighting.</p>
+        <div class="service-price">From ₹2,500</div>
+        <a href="tel:+919876543210" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">
+          Book Now
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3>Electrical Repairs</h3>
+        <p>Fault finding, short circuit repairs, switchboard repairs, and electrical troubleshooting.</p>
+        <div class="service-price">From ₹500</div>
+        <a href="tel:+919876543210" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">
+          Book Now
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h3>Emergency Services</h3>
+        <p>24/7 emergency electrical services for power failures, sparks, and urgent repairs.</p>
+        <div class="service-price">Emergency Call</div>
+        <a href="tel:+919876543210" class="btn" style="padding: 0.8rem 1.5rem; font-size: 0.9rem; background: #ef4444; color: white;">
+          Emergency Call
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-us" id="why-us">
+    <h2 class="section-title">Why Choose SHUKLA ELECTRICALS?</h2>
     
+    <div class="features">
+      <div class="feature">
+        <i class="fas fa-certificate"></i>
+        <h3>Certified Electricians</h3>
+        <p>All technicians are certified with government-approved training.</p>
+      </div>
+      
+      <div class="feature">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Safety First</h3>
+        <p>100% compliance with electrical safety standards and regulations.</p>
+      </div>
+      
+      <div class="feature">
+        <i class="fas fa-clock"></i>
+        <h3>24/7 Availability</h3>
+        <p>Round-the-clock services including weekends and holidays.</p>
+      </div>
+      
+      <div class="feature">
+        <i class="fas fa-rupee-sign"></i>
+        <h3>Transparent Pricing</h3>
+        <p>No hidden charges. Detailed quotes before work begins.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Banner -->
+  <div class="contact-banner" id="contact">
+    <h2>Need Electrical Help?</h2>
+    <p>Call us anytime for professional electrical services</p>
+    
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <span>+91 98765 43210</span>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <span>contact@shuklaelectricals.com</span>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-clock"></i>
+        <span>24/7 Emergency Service</span>
+      </div>
+    </div>
+    
+    <div style="margin-top: 2rem;">
+      <a href="tel:+919876543210" class="btn btn-primary" style="margin-right: 1rem;">
+        <i class="fas fa-phone"></i> Call Now
+      </a>
+      <a href="https://wa.me/919876543210" class="btn btn-secondary">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>SHUKLA ELECTRICALS</h3>
+        <p>Professional electrical services with 15+ years experience. Certified, insured, and committed to safety and quality workmanship.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why-us">Why Choose Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Our Services</h3>
+        <ul class="footer-links">
+          <li><a href="#">Electrical Wiring</a></li>
+          <li><a href="#">EV Charger Installation</a></li>
+          <li><a href="#">Meter Cabin Setup</a></li>
+          <li><a href="#">Lighting Solutions</a></li>
+          <li><a href="#">Electrical Repairs</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Contact Info</h3>
+        <ul class="footer-links">
+          <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+          <li><i class="fas fa-envelope"></i> contact@shuklaelectricals.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> Service Across Delhi NCR</li>
+          <li><i class="fas fa-clock"></i> 24/7 Emergency Service</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 SHUKLA ELECTRICALS. All Rights Reserved. | Professional Electrician Services</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.header-container') && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Close mobile menu if open
+          navLinks.classList.remove('active');
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      });
+    });
+
+    // Animate stats counter
+    function animateStats() {
+      const statNumbers = document.querySelectorAll('.stat-number');
+      statNumbers.forEach(stat => {
+        const finalValue = parseInt(stat.textContent);
+        let currentValue = 0;
+        const increment = finalValue / 50;
+        const timer = setInterval(() => {
+          currentValue += increment;
+          if (currentValue >= finalValue) {
+            stat.textContent = finalValue + (stat.textContent.includes('+') ? '+' : '');
+            clearInterval(timer);
+          } else {
+            stat.textContent = Math.floor(currentValue) + (stat.textContent.includes('+') ? '+' : '');
+          }
+        }, 30);
+      });
+    }
+
+    // Trigger animation when stats are in viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStats();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(document.querySelector('.stats'));
+  </script>
 </body>
-</html>
+            </html>
