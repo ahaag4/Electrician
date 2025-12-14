@@ -28,6 +28,7 @@
         body {
             background: var(--light);
             color: var(--text-dark);
+            min-height: 100vh;
         }
         
         .admin-container {
@@ -45,6 +46,7 @@
             top: 0;
             height: 100vh;
             overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         }
         
         .admin-logo {
@@ -64,6 +66,7 @@
         
         .admin-nav {
             list-style: none;
+            padding: 0;
         }
         
         .admin-nav li {
@@ -79,11 +82,13 @@
             padding: 12px 15px;
             border-radius: 8px;
             transition: all 0.3s;
+            border: 1px solid transparent;
         }
         
         .admin-nav a:hover, .admin-nav a.active {
             background: rgba(255, 255, 255, 0.1);
             color: white;
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
         /* Main Content */
@@ -99,7 +104,7 @@
             align-items: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 2px solid var(--primary);
         }
         
         .admin-title {
@@ -118,10 +123,15 @@
         
         .stat-card {
             background: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             border-top: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
         }
         
         .stat-card h3 {
@@ -141,7 +151,7 @@
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             margin-bottom: 30px;
         }
         
@@ -156,7 +166,7 @@
             text-align: left;
             font-weight: 600;
             color: var(--text-dark);
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 2px solid #e2e8f0;
         }
         
         td {
@@ -165,22 +175,25 @@
         }
         
         tr:hover {
-            background: #f8fafc;
+            background: rgba(16, 185, 129, 0.05);
         }
         
         .table-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         
         .btn-sm {
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
             border: none;
             cursor: pointer;
             font-size: 0.8rem;
             font-weight: 600;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .btn-edit {
@@ -188,9 +201,17 @@
             color: white;
         }
         
+        .btn-edit:hover {
+            background: var(--secondary);
+        }
+        
         .btn-delete {
             background: #ef4444;
             color: white;
+        }
+        
+        .btn-delete:hover {
+            background: #dc2626;
         }
         
         .btn-view {
@@ -198,12 +219,16 @@
             color: white;
         }
         
+        .btn-view:hover {
+            background: #2563eb;
+        }
+        
         /* Forms */
         .form-container {
             background: white;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             max-width: 800px;
             margin: 0 auto;
         }
@@ -226,6 +251,7 @@
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s;
+            background: #fff;
         }
         
         .form-control:focus {
@@ -245,25 +271,31 @@
             border-radius: 8px 8px 0 0;
             border: 1px solid #e2e8f0;
             border-bottom: none;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
         }
         
         .editor-toolbar button {
             background: white;
             border: 1px solid #e2e8f0;
             padding: 8px 12px;
-            margin-right: 5px;
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 14px;
         }
         
         .editor-toolbar button:hover {
             background: var(--light);
+            border-color: var(--primary);
         }
         
-        #editorContent {
+        #postContent {
             min-height: 300px;
             border-radius: 0 0 8px 8px;
+            font-family: monospace;
+            line-height: 1.6;
         }
         
         .image-upload {
@@ -273,10 +305,12 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
+            background: #f8fafc;
         }
         
         .image-upload:hover {
             border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.05);
         }
         
         .image-upload i {
@@ -290,7 +324,8 @@
             max-height: 300px;
             border-radius: 8px;
             margin-top: 15px;
-            display: none;
+            display: block;
+            border: 1px solid #e2e8f0;
         }
         
         .form-actions {
@@ -298,6 +333,8 @@
             gap: 15px;
             justify-content: flex-end;
             margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
         }
         
         .btn {
@@ -319,6 +356,8 @@
         
         .btn-primary:hover {
             background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
         
         .btn-secondary {
@@ -327,28 +366,30 @@
             border: 1px solid #e2e8f0;
         }
         
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
+        .btn-secondary:hover {
+            background: #e2e8f0;
         }
         
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
+        /* Loading Spinner */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         /* Toast Notifications */
@@ -369,14 +410,19 @@
             align-items: center;
             gap: 10px;
             animation: slideIn 0.3s ease;
-        }
-        
-        .toast.success {
             border-left: 4px solid var(--primary);
         }
         
+        .toast.success {
+            border-left-color: var(--primary);
+        }
+        
         .toast.error {
-            border-left: 4px solid #ef4444;
+            border-left-color: #ef4444;
+        }
+        
+        .toast.warning {
+            border-left-color: var(--accent);
         }
         
         @keyframes slideIn {
@@ -393,7 +439,70 @@
             .admin-sidebar {
                 height: auto;
                 position: static;
+                max-height: 200px;
             }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-actions {
+                flex-direction: column;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* Status badges */
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .status-published {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+        }
+        
+        .status-draft {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent);
+        }
+        
+        /* No data message */
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+        
+        .no-data i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #e2e8f0;
+        }
+        
+        /* Image preview handling */
+        #imageUrl {
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -407,19 +516,19 @@
             </div>
             
             <ul class="admin-nav">
-                <li><a href="#" class="active" onclick="showDashboard()">
+                <li><a href="#" id="navDashboard" onclick="showDashboard()" class="active">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a></li>
-                <li><a href="#" onclick="showAllPosts()">
+                <li><a href="#" id="navAllPosts" onclick="showAllPosts()">
                     <i class="fas fa-newspaper"></i> All Posts
                 </a></li>
-                <li><a href="#" onclick="showAddPost()">
+                <li><a href="#" id="navAddPost" onclick="showAddPost()">
                     <i class="fas fa-plus-circle"></i> Add New Post
                 </a></li>
-                <li><a href="#" onclick="showCategories()">
+                <li><a href="#" id="navCategories" onclick="showCategories()">
                     <i class="fas fa-tags"></i> Categories
                 </a></li>
-                <li><a href="#" onclick="showSubscribers()">
+                <li><a href="#" id="navSubscribers" onclick="showSubscribers()">
                     <i class="fas fa-users"></i> Subscribers
                 </a></li>
                 <li><a href="index.html">
@@ -461,7 +570,9 @@
         };
         
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
         const database = firebase.database();
         const auth = firebase.auth();
         
@@ -478,35 +589,41 @@
         
         // Navigation Functions
         function showDashboard() {
+            setActiveNav('navDashboard');
             loadDashboard();
-            updateActiveNav('dashboard');
         }
         
         function showAllPosts() {
+            setActiveNav('navAllPosts');
             loadAllPosts();
-            updateActiveNav('allPosts');
         }
         
         function showAddPost() {
+            setActiveNav('navAddPost');
             loadAddPostForm();
-            updateActiveNav('addPost');
         }
         
         function showCategories() {
+            setActiveNav('navCategories');
             loadCategories();
-            updateActiveNav('categories');
         }
         
         function showSubscribers() {
+            setActiveNav('navSubscribers');
             loadSubscribers();
-            updateActiveNav('subscribers');
         }
         
-        function updateActiveNav(activeItem) {
+        function setActiveNav(navId) {
+            // Remove active class from all nav items
             document.querySelectorAll('.admin-nav a').forEach(link => {
                 link.classList.remove('active');
             });
-            // You'll need to update this based on which nav item was clicked
+            
+            // Add active class to clicked nav item
+            const activeNav = document.getElementById(navId);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
         }
         
         // Dashboard
@@ -542,7 +659,9 @@
                 <div class="admin-table">
                     <h3 style="padding: 20px; margin: 0;">Recent Posts</h3>
                     <div id="recentPostsTable">
-                        Loading...
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -552,19 +671,28 @@
         }
         
         async function loadDashboardStats() {
-            const postsRef = database.ref('blog/posts');
-            const subscribersRef = database.ref('newsletter/subscribers');
-            
-            postsRef.once('value').then((snapshot) => {
-                const posts = snapshot.val() || {};
+            try {
+                const postsRef = database.ref('blog/posts');
+                const subscribersRef = database.ref('newsletter/subscribers');
+                
+                const [postsSnapshot, subscribersSnapshot] = await Promise.all([
+                    postsRef.once('value'),
+                    subscribersRef.once('value')
+                ]);
+                
+                const posts = postsSnapshot.val() || {};
+                const subscribers = subscribersSnapshot.val() || {};
+                
+                // Convert posts to array
                 const postArray = Object.values(posts);
                 
-                // Total posts
+                // Update stats
                 document.getElementById('totalPosts').textContent = postArray.length;
                 
-                // Total views
                 const totalViews = postArray.reduce((sum, post) => sum + (post.views || 0), 0);
                 document.getElementById('totalViews').textContent = totalViews.toLocaleString();
+                
+                document.getElementById('totalSubscribers').textContent = Object.keys(subscribers).length;
                 
                 // Today's posts
                 const today = new Date();
@@ -580,49 +708,57 @@
                     .sort((a, b) => b.timestamp - a.timestamp)
                     .slice(0, 5);
                 
-                document.getElementById('recentPostsTable').innerHTML = `
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Views</th>
-                                <th>Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${recentPosts.map(post => `
+                if (recentPosts.length > 0) {
+                    document.getElementById('recentPostsTable').innerHTML = `
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>${post.title}</td>
-                                    <td>${post.category || 'Uncategorized'}</td>
-                                    <td>${post.views || 0}</td>
-                                    <td>${formatDate(post.timestamp)}</td>
-                                    <td>
-                                        <div class="table-actions">
-                                            <button class="btn-sm btn-view" onclick="viewPost('${post.id}')">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button class="btn-sm btn-edit" onclick="editPost('${post.id}')">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button class="btn-sm btn-delete" onclick="deletePost('${post.id}')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Views</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
                                 </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                `;
-            });
-            
-            // Subscribers count
-            subscribersRef.once('value').then((snapshot) => {
-                const subscribers = snapshot.val() || {};
-                document.getElementById('totalSubscribers').textContent = Object.keys(subscribers).length;
-            });
+                            </thead>
+                            <tbody>
+                                ${recentPosts.map(post => `
+                                    <tr>
+                                        <td>${post.title || 'Untitled'}</td>
+                                        <td>${post.category || 'Uncategorized'}</td>
+                                        <td>${post.views || 0}</td>
+                                        <td>${formatDate(post.timestamp)}</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="btn-sm btn-view" onclick="viewPost('${post.id}')">
+                                                    <i class="fas fa-eye"></i> View
+                                                </button>
+                                                <button class="btn-sm btn-edit" onclick="editPost('${post.id}')">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </button>
+                                                <button class="btn-sm btn-delete" onclick="deletePost('${post.id}')">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                } else {
+                    document.getElementById('recentPostsTable').innerHTML = `
+                        <div class="no-data">
+                            <i class="fas fa-newspaper"></i>
+                            <h3>No Posts Yet</h3>
+                            <p>Create your first blog post to get started!</p>
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                console.error('Error loading dashboard stats:', error);
+                showToast('Error loading dashboard data', 'error');
+            }
         }
         
         // All Posts
@@ -631,9 +767,11 @@
             adminContent.innerHTML = `
                 <div class="admin-header">
                     <h1 class="admin-title">All Posts</h1>
-                    <button class="btn btn-primary" onclick="showAddPost()">
-                        <i class="fas fa-plus"></i> New Post
-                    </button>
+                    <div>
+                        <button class="btn btn-primary" onclick="showAddPost()">
+                            <i class="fas fa-plus"></i> New Post
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="admin-table">
@@ -649,7 +787,13 @@
                             </tr>
                         </thead>
                         <tbody id="postsTableBody">
-                            Loading...
+                            <tr>
+                                <td colspan="6" class="text-center py-4">
+                                    <div class="loading-spinner">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -659,42 +803,63 @@
         }
         
         async function loadPostsTable() {
-            const postsRef = database.ref('blog/posts');
-            
-            postsRef.orderByChild('timestamp').once('value').then((snapshot) => {
+            try {
+                const postsRef = database.ref('blog/posts');
+                const snapshot = await postsRef.orderByChild('timestamp').once('value');
                 const posts = snapshot.val() || {};
+                
                 const postArray = Object.entries(posts).map(([id, post]) => ({
                     id,
                     ...post
                 })).reverse();
                 
-                document.getElementById('postsTableBody').innerHTML = postArray.map(post => `
-                    <tr>
-                        <td>${post.title}</td>
-                        <td>${post.category || 'Uncategorized'}</td>
-                        <td>${post.views || 0}</td>
-                        <td>
-                            <span style="color: ${post.published ? '#10b981' : '#f59e0b'};">
-                                ${post.published ? 'Published' : 'Draft'}
-                            </span>
-                        </td>
-                        <td>${formatDate(post.timestamp)}</td>
-                        <td>
-                            <div class="table-actions">
-                                <button class="btn-sm btn-view" onclick="viewPost('${post.id}')">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn-sm btn-edit" onclick="editPost('${post.id}')">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn-sm btn-delete" onclick="deletePost('${post.id}')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                `).join('');
-            });
+                if (postArray.length > 0) {
+                    document.getElementById('postsTableBody').innerHTML = postArray.map(post => `
+                        <tr>
+                            <td>${post.title || 'Untitled'}</td>
+                            <td>${post.category || 'Uncategorized'}</td>
+                            <td>${post.views || 0}</td>
+                            <td>
+                                <span class="status-badge ${post.published ? 'status-published' : 'status-draft'}">
+                                    ${post.published ? 'Published' : 'Draft'}
+                                </span>
+                            </td>
+                            <td>${formatDate(post.timestamp)}</td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="btn-sm btn-view" onclick="viewPost('${post.id}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-sm btn-edit" onclick="editPost('${post.id}')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-sm btn-delete" onclick="deletePost('${post.id}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    document.getElementById('postsTableBody').innerHTML = `
+                        <tr>
+                            <td colspan="6">
+                                <div class="no-data">
+                                    <i class="fas fa-newspaper"></i>
+                                    <h3>No Posts Found</h3>
+                                    <p>Create your first blog post to get started!</p>
+                                    <button class="btn btn-primary mt-3" onclick="showAddPost()">
+                                        <i class="fas fa-plus"></i> Create Post
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                showToast('Error loading posts', 'error');
+            }
         }
         
         // Add/Edit Post Form
@@ -703,11 +868,15 @@
             let post = null;
             
             if (postId) {
-                // Load existing post for editing
-                const postRef = database.ref(`blog/posts/${postId}`);
-                const snapshot = await postRef.once('value');
-                post = snapshot.val();
-                if (post) post.id = postId;
+                try {
+                    const postRef = database.ref(`blog/posts/${postId}`);
+                    const snapshot = await postRef.once('value');
+                    post = snapshot.val();
+                    if (post) post.id = postId;
+                } catch (error) {
+                    console.error('Error loading post:', error);
+                    showToast('Error loading post', 'error');
+                }
             }
             
             adminContent.innerHTML = `
@@ -725,13 +894,16 @@
                         <div class="form-group">
                             <label class="form-label" for="postTitle">Post Title *</label>
                             <input type="text" id="postTitle" class="form-control" 
-                                   value="${post?.title || ''}" required>
+                                   value="${post?.title || ''}" required
+                                   placeholder="Enter post title...">
                         </div>
                         
                         <div class="form-group">
                             <label class="form-label" for="postSlug">URL Slug</label>
                             <input type="text" id="postSlug" class="form-control" 
-                                   value="${post?.slug || ''}" placeholder="auto-generates-from-title">
+                                   value="${post?.slug || ''}" 
+                                   placeholder="Auto-generates from title">
+                            <small class="text-muted">SEO-friendly URL for the post</small>
                         </div>
                         
                         <div class="form-group">
@@ -744,45 +916,54 @@
                                 <option value="Lighting" ${post?.category === 'Lighting' ? 'selected' : ''}>Lighting</option>
                                 <option value="Maintenance" ${post?.category === 'Maintenance' ? 'selected' : ''}>Maintenance</option>
                                 <option value="Updates" ${post?.category === 'Updates' ? 'selected' : ''}>Updates</option>
+                                <option value="Tips" ${post?.category === 'Tips' ? 'selected' : ''}>Tips & Guides</option>
                             </select>
-                            <small>Or <a href="#" onclick="addNewCategory()">add new category</a></small>
                         </div>
                         
                         <div class="form-group">
                             <label class="form-label" for="postExcerpt">Excerpt (Short Description) *</label>
-                            <textarea id="postExcerpt" class="form-control" required>${post?.excerpt || ''}</textarea>
-                            <small>Appears in blog listing (max 160 characters)</small>
+                            <textarea id="postExcerpt" class="form-control" required 
+                                      placeholder="Brief description of the post (max 160 characters)...">${post?.excerpt || ''}</textarea>
+                            <small class="text-muted">Appears in blog listing and search results</small>
                         </div>
                         
                         <div class="form-group">
                             <label class="form-label">Featured Image</label>
-                            <div class="image-upload" onclick="document.getElementById('imageUpload').click()">
+                            <div class="image-upload">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p>Click to upload or paste image URL</p>
                                 <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
                                 <input type="text" id="imageUrl" class="form-control mt-3" 
-                                       value="${post?.imageUrl || ''}" placeholder="Or paste image URL here">
-                                <img id="imagePreview" src="${post?.imageUrl || ''}" alt="Preview">
+                                       value="${post?.imageUrl || ''}" 
+                                       placeholder="Paste image URL here (e.g., https://example.com/image.jpg)"
+                                       onchange="updateImagePreview(this.value)">
+                                ${post?.imageUrl ? `
+                                    <img id="imagePreview" src="${post.imageUrl}" alt="Preview" style="display: block;">
+                                ` : `
+                                    <img id="imagePreview" alt="Preview">
+                                `}
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label class="form-label" for="postContent">Content *</label>
                             <div class="editor-toolbar">
-                                <button type="button" onclick="formatText('bold')"><b>B</b></button>
-                                <button type="button" onclick="formatText('italic')"><i>I</i></button>
-                                <button type="button" onclick="formatText('underline')"><u>U</u></button>
+                                <button type="button" onclick="formatText('bold')"><i class="fas fa-bold"></i></button>
+                                <button type="button" onclick="formatText('italic')"><i class="fas fa-italic"></i></button>
                                 <button type="button" onclick="formatText('h2')">H2</button>
                                 <button type="button" onclick="formatText('h3')">H3</button>
-                                <button type="button" onclick="formatText('ul')">• List</button>
+                                <button type="button" onclick="formatText('ul')"><i class="fas fa-list-ul"></i></button>
+                                <button type="button" onclick="formatText('ol')"><i class="fas fa-list-ol"></i></button>
                             </div>
-                            <textarea id="postContent" class="form-control" required>${post?.content || ''}</textarea>
+                            <textarea id="postContent" class="form-control" required 
+                                      placeholder="Write your blog post content here...">${post?.content || ''}</textarea>
                         </div>
                         
                         <div class="form-group">
                             <label class="form-label" for="postAuthor">Author</label>
                             <input type="text" id="postAuthor" class="form-control" 
-                                   value="${post?.author || 'SHUKLA-ELECTRICALS Team'}">
+                                   value="${post?.author || 'SHUKLA-ELECTRICALS Team'}" 
+                                   placeholder="Author name">
                         </div>
                         
                         <div class="form-group">
@@ -792,7 +973,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-check-label">
+                            <label class="form-check-label" style="display: flex; align-items: center; gap: 10px;">
                                 <input type="checkbox" id="postPublished" ${post?.published !== false ? 'checked' : ''}>
                                 Publish immediately
                             </label>
@@ -810,9 +991,32 @@
                 </div>
             `;
             
-            // Update image preview if URL exists
-            if (post?.imageUrl) {
-                document.getElementById('imagePreview').style.display = 'block';
+            // Setup auto-slug generation
+            document.getElementById('postTitle').addEventListener('input', function(e) {
+                if (!document.getElementById('postSlug').value) {
+                    const slug = e.target.value
+                        .toLowerCase()
+                        .replace(/[^a-z0-9\s-]/g, '')
+                        .replace(/\s+/g, '-')
+                        .replace(/-+/g, '-');
+                    document.getElementById('postSlug').value = slug;
+                }
+            });
+            
+            // Setup image URL preview
+            document.getElementById('imageUrl').addEventListener('input', function(e) {
+                updateImagePreview(e.target.value);
+            });
+        }
+        
+        // Update image preview
+        function updateImagePreview(url) {
+            const preview = document.getElementById('imagePreview');
+            if (url && url.startsWith('http')) {
+                preview.src = url;
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
             }
         }
         
@@ -832,9 +1036,14 @@
                 author: document.getElementById('postAuthor').value.trim(),
                 readTime: parseInt(document.getElementById('readTime').value) || 5,
                 published: document.getElementById('postPublished').checked,
-                timestamp: postId ? undefined : Date.now(),
                 updatedAt: Date.now()
             };
+            
+            // Validate required fields
+            if (!postData.title || !postData.category || !postData.excerpt || !postData.content) {
+                showToast('Please fill all required fields', 'error');
+                return;
+            }
             
             try {
                 const postsRef = database.ref('blog/posts');
@@ -846,14 +1055,20 @@
                 } else {
                     // Add new post
                     const newPostRef = postsRef.push();
+                    const newPostId = newPostRef.key;
+                    
                     await newPostRef.set({
                         ...postData,
+                        id: newPostId,
                         views: 0,
+                        timestamp: Date.now(),
                         createdAt: Date.now()
                     });
+                    
                     showToast('Post published successfully!', 'success');
                 }
                 
+                // Redirect to all posts after delay
                 setTimeout(() => showAllPosts(), 1500);
             } catch (error) {
                 console.error('Error saving post:', error);
@@ -863,6 +1078,7 @@
         
         // Edit Post
         function editPost(postId) {
+            showAddPost(); // Set nav active
             loadAddPostForm(postId);
         }
         
@@ -880,7 +1096,12 @@
             try {
                 await database.ref(`blog/posts/${postId}`).remove();
                 showToast('Post deleted successfully!', 'success');
-                loadPostsTable(); // Refresh the table
+                // Refresh the current view
+                if (document.getElementById('postsTableBody')) {
+                    loadPostsTable();
+                } else {
+                    showAllPosts();
+                }
             } catch (error) {
                 console.error('Error deleting post:', error);
                 showToast('Error deleting post. Please try again.', 'error');
@@ -893,7 +1114,7 @@
             adminContent.innerHTML = `
                 <div class="admin-header">
                     <h1 class="admin-title">Categories</h1>
-                    <button class="btn btn-primary" onclick="showAddCategoryModal()">
+                    <button class="btn btn-primary" onclick="addNewCategory()">
                         <i class="fas fa-plus"></i> Add Category
                     </button>
                 </div>
@@ -904,13 +1125,18 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Slug</th>
-                                <th>Description</th>
                                 <th>Post Count</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="categoriesTableBody">
-                            Loading...
+                            <tr>
+                                <td colspan="4" class="text-center py-4">
+                                    <div class="loading-spinner">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -920,10 +1146,11 @@
         }
         
         async function loadCategoriesTable() {
-            const postsRef = database.ref('blog/posts');
-            
-            postsRef.once('value').then((snapshot) => {
+            try {
+                const postsRef = database.ref('blog/posts');
+                const snapshot = await postsRef.once('value');
                 const posts = snapshot.val() || {};
+                
                 const categories = {};
                 
                 // Count posts per category
@@ -939,23 +1166,50 @@
                     categories[category].count++;
                 });
                 
-                document.getElementById('categoriesTableBody').innerHTML = 
-                    Object.values(categories).map(cat => `
+                // Sort categories by name
+                const sortedCategories = Object.values(categories).sort((a, b) => a.name.localeCompare(b.name));
+                
+                if (sortedCategories.length > 0) {
+                    document.getElementById('categoriesTableBody').innerHTML = 
+                        sortedCategories.map(cat => `
+                            <tr>
+                                <td>${cat.name}</td>
+                                <td>${cat.slug}</td>
+                                <td>${cat.count}</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-sm btn-edit" onclick="editCategory('${cat.name}')">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join('');
+                } else {
+                    document.getElementById('categoriesTableBody').innerHTML = `
                         <tr>
-                            <td>${cat.name}</td>
-                            <td>${cat.slug}</td>
-                            <td>-</td>
-                            <td>${cat.count}</td>
-                            <td>
-                                <div class="table-actions">
-                                    <button class="btn-sm btn-edit" onclick="editCategory('${cat.name}')">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
+                            <td colspan="4">
+                                <div class="no-data">
+                                    <i class="fas fa-tags"></i>
+                                    <h3>No Categories</h3>
+                                    <p>Categories will appear automatically when you create posts</p>
                                 </div>
                             </td>
                         </tr>
-                    `).join('');
-            });
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading categories:', error);
+                showToast('Error loading categories', 'error');
+            }
+        }
+        
+        // Add new category
+        function addNewCategory() {
+            const categoryName = prompt('Enter new category name:');
+            if (categoryName && categoryName.trim()) {
+                showToast(`Category "${categoryName}" added. Now create a post with this category.`, 'success');
+            }
         }
         
         // Subscribers Management
@@ -980,7 +1234,13 @@
                             </tr>
                         </thead>
                         <tbody id="subscribersTableBody">
-                            Loading...
+                            <tr>
+                                <td colspan="4" class="text-center py-4">
+                                    <div class="loading-spinner">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -990,34 +1250,99 @@
         }
         
         async function loadSubscribersTable() {
-            const subscribersRef = database.ref('newsletter/subscribers');
-            
-            subscribersRef.once('value').then((snapshot) => {
+            try {
+                const subscribersRef = database.ref('newsletter/subscribers');
+                const snapshot = await subscribersRef.once('value');
                 const subscribers = snapshot.val() || {};
                 
-                document.getElementById('subscribersTableBody').innerHTML = 
-                    Object.entries(subscribers).map(([id, subscriber]) => `
+                const subscriberArray = Object.entries(subscribers);
+                
+                if (subscriberArray.length > 0) {
+                    document.getElementById('subscribersTableBody').innerHTML = 
+                        subscriberArray.map(([id, subscriber]) => `
+                            <tr>
+                                <td>${subscriber.email || 'N/A'}</td>
+                                <td>${formatDate(subscriber.timestamp)}</td>
+                                <td>
+                                    <span class="status-badge ${subscriber.subscribed !== false ? 'status-published' : 'status-draft'}">
+                                        ${subscriber.subscribed !== false ? 'Active' : 'Inactive'}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-sm btn-delete" onclick="deleteSubscriber('${id}')">
+                                            <i class="fas fa-trash"></i> Remove
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join('');
+                } else {
+                    document.getElementById('subscribersTableBody').innerHTML = `
                         <tr>
-                            <td>${subscriber.email}</td>
-                            <td>${formatDate(subscriber.timestamp)}</td>
-                            <td>
-                                <span style="color: ${subscriber.subscribed !== false ? '#10b981' : '#64748b'}">
-                                    ${subscriber.subscribed !== false ? 'Active' : 'Inactive'}
-                                </span>
-                            </td>
-                            <td>
-                                <div class="table-actions">
-                                    <button class="btn-sm btn-delete" onclick="deleteSubscriber('${id}')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                            <td colspan="4">
+                                <div class="no-data">
+                                    <i class="fas fa-users"></i>
+                                    <h3>No Subscribers Yet</h3>
+                                    <p>Subscribers will appear here when they sign up for your newsletter</p>
                                 </div>
                             </td>
                         </tr>
-                    `).join('');
-            });
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading subscribers:', error);
+                showToast('Error loading subscribers', 'error');
+            }
         }
         
-        // Helper Functions
+        // Delete Subscriber
+        async function deleteSubscriber(subscriberId) {
+            if (!confirm('Are you sure you want to remove this subscriber?')) {
+                return;
+            }
+            
+            try {
+                await database.ref(`newsletter/subscribers/${subscriberId}`).remove();
+                showToast('Subscriber removed successfully!', 'success');
+                loadSubscribersTable();
+            } catch (error) {
+                console.error('Error deleting subscriber:', error);
+                showToast('Error removing subscriber', 'error');
+            }
+        }
+        
+        // Export Subscribers (CSV)
+        async function exportSubscribers() {
+            try {
+                const subscribersRef = database.ref('newsletter/subscribers');
+                const snapshot = await subscribersRef.once('value');
+                const subscribers = snapshot.val() || {};
+                
+                let csvContent = "data:text/csv;charset=utf-8,Email,Subscribed Date,Status\n";
+                
+                Object.values(subscribers).forEach(subscriber => {
+                    const date = formatDate(subscriber.timestamp);
+                    const status = subscriber.subscribed !== false ? 'Active' : 'Inactive';
+                    csvContent += `${subscriber.email},${date},${status}\n`;
+                });
+                
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "subscribers.csv");
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                showToast('Subscribers exported successfully!', 'success');
+            } catch (error) {
+                console.error('Error exporting subscribers:', error);
+                showToast('Error exporting subscribers', 'error');
+            }
+        }
+        
+        // Text formatting helper
         function formatText(command) {
             const textarea = document.getElementById('postContent');
             const start = textarea.selectionStart;
@@ -1032,9 +1357,6 @@
                 case 'italic':
                     formattedText = `<em>${selectedText}</em>`;
                     break;
-                case 'underline':
-                    formattedText = `<u>${selectedText}</u>`;
-                    break;
                 case 'h2':
                     formattedText = `<h2>${selectedText}</h2>`;
                     break;
@@ -1043,7 +1365,11 @@
                     break;
                 case 'ul':
                     const lines = selectedText.split('\n');
-                    formattedText = '<ul>\n' + lines.map(line => `  <li>${line}</li>`).join('\n') + '\n</ul>';
+                    formattedText = '<ul>\n' + lines.map(line => line.trim() ? `  <li>${line}</li>` : '').join('\n') + '\n</ul>';
+                    break;
+                case 'ol':
+                    const olLines = selectedText.split('\n');
+                    formattedText = '<ol>\n' + olLines.map(line => line.trim() ? `  <li>${line}</li>` : '').join('\n') + '\n</ol>';
                     break;
             }
             
@@ -1052,26 +1378,27 @@
             textarea.selectionStart = textarea.selectionEnd = start + formattedText.length;
         }
         
+        // Image upload handler
         function handleImageUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
             
-            // For Firebase Storage, you would upload the file here
-            // For simplicity, we'll just show a message
-            showToast('Image uploaded! Paste the URL in the field below.', 'success');
+            // Show file info
+            showToast(`Selected file: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`, 'success');
             
-            // In a real app, you would:
-            // 1. Upload to Firebase Storage
-            // 2. Get the download URL
-            // 3. Set it in the imageUrl field
+            // In a real app, you would upload to Firebase Storage here
+            // For now, we'll just show a message
+            document.getElementById('imageUrl').value = 'Upload functionality coming soon...';
+            document.getElementById('imageUrl').focus();
         }
         
+        // Show Toast Notification
         function showToast(message, type = 'success') {
             const toastContainer = document.getElementById('toastContainer');
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             toast.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
                 <span>${message}</span>
             `;
             
@@ -1083,8 +1410,12 @@
             }, 5000);
         }
         
+        // Format date
         function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
             const date = new Date(timestamp);
+            if (isNaN(date.getTime())) return 'Invalid Date';
+            
             return date.toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'short',
@@ -1092,23 +1423,29 @@
             });
         }
         
+        // Logout
         function logout() {
             auth.signOut().then(() => {
                 window.location.href = 'admin-login.html';
+            }).catch(error => {
+                console.error('Logout error:', error);
+                showToast('Error logging out', 'error');
             });
         }
         
-        // Auto-generate slug from title
-        document.addEventListener('input', (e) => {
-            if (e.target.id === 'postTitle' && !document.getElementById('postSlug').value) {
-                const slug = e.target.value
-                    .toLowerCase()
-                    .replace(/[^\w\s-]/g, '')
-                    .replace(/\s+/g, '-')
-                    .replace(/--+/g, '-');
-                document.getElementById('postSlug').value = slug;
+        // Initialize image URL preview
+        function initImagePreview() {
+            const imageUrlInput = document.getElementById('imageUrl');
+            if (imageUrlInput) {
+                imageUrlInput.addEventListener('input', function(e) {
+                    updateImagePreview(e.target.value);
+                });
             }
-        });
+        }
+        
+        // Call init on DOM ready
+        document.addEventListener('DOMContentLoaded', initImagePreview);
+        
     </script>
 </body>
-</html>
+    </html>
