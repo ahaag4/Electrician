@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Admin - SHUKLA-ELECTRICALS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #10b981;
+            --secondary: #059669;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background: var(--light);
+            color: var(--text-dark);
+        }
+        
+        .admin-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .admin-sidebar {
+            background: var(--dark);
+            color: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .admin-logo i {
+            color: var(--accent);
+        }
+        
+        .admin-nav {
+            list-style: none;
+        }
+        
+        .admin-nav li {
+            margin-bottom: 10px;
+        }
+        
+        .admin-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .admin-nav a:hover, .admin-nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        /* Main Content */
+        .admin-main {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .admin-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--primary);
+        }
+        
+        .stat-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Tables */
+        .admin-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: var(--light);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-dark);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tr:hover {
+            background: #f8fafc;
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-sm {
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-edit {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .btn-view {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        /* Forms */
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .editor-toolbar {
+            background: var(--light);
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            border: 1px solid #e2e8f0;
+            border-bottom: none;
+        }
+        
+        .editor-toolbar button {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            margin-right: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .editor-toolbar button:hover {
+            background: var(--light);
+        }
+        
+        #editorContent {
+            min-height: 300px;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .image-upload {
+            border: 2px dashed #e2e8f0;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-upload:hover {
+            border-color: var(--primary);
+        }
+        
+        .image-upload i {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        #imagePreview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary {
+            background: var(--light);
+            color: var(--text-dark);
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+        
+        .toast {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .toast.success {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-sidebar {
+                height: auto;
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <i class="fas fa-bolt"></i>
+                <span>Blog Admin</span>
+            </div>
+            
+            <ul class="admin-nav">
+                <li><a href="#" class="active" onclick="showDashboard()">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a></li>
+                <li><a href="#" onclick="showAllPosts()">
+                    <i class="fas fa-newspaper"></i> All Posts
+                </a></li>
+                <li><a href="#" onclick="showAddPost()">
+                    <i class="fas fa-plus-circle"></i> Add New Post
+                </a></li>
+                <li><a href="#" onclick="showCategories()">
+                    <i class="fas fa-tags"></i> Categories
+                </a></li>
+                <li><a href="#" onclick="showSubscribers()">
+                    <i class="fas fa-users"></i> Subscribers
+                </a></li>
+                <li><a href="index.html">
+                    <i class="fas fa-home"></i> View Site
+                </a></li>
+                <li><a href="#" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main" id="adminContent">
+            <!-- Content will be loaded dynamically -->
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDGpagCpskeOxzVO4C5qgdVUTeWO8rUZUU",
+            authDomain: "electrician-830b2.firebaseapp.com",
+            databaseURL: "https://electrician-830b2-default-rtdb.firebaseio.com",
+            projectId: "electrician-830b2",
+            storageBucket: "electrician-830b2.firebasestorage.app",
+            messagingSenderId: "1053791458330",
+            appId: "1:1053791458330:web:fdbf5befa79aef2376eda3"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const auth = firebase.auth();
+        
+        // Check Authentication
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in
+                showDashboard();
+            } else {
+                // User is signed out, redirect to login
+                window.location.href = 'admin-login.html';
+            }
+        });
+        
+        // Navigation Functions
+        function showDashboard() {
+            loadDashboard();
+            updateActiveNav('dashboard');
+        }
+        
+        function showAllPosts() {
+            loadAllPosts();
+            updateActiveNav('allPosts');
+        }
+        
+        function showAddPost() {
+            loadAddPostForm();
+            updateActiveNav('addPost');
+        }
+        
+        function showCategories() {
+            loadCategories();
+            updateActiveNav('categories');
+        }
+        
+        function showSubscribers() {
+            loadSubscribers();
+            updateActiveNav('subscribers');
+        }
+        
+        function updateActiveNav(activeItem) {
+            document.querySelectorAll('.admin-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            // You'll need to update this based on which nav item was clicked
+        }
+        
+        // Dashboard
+        async function loadDashboard() {
+            const adminContent = document.getElementById('adminContent');
+            adminContent.innerHTML = `
+                <div class="admin-header">
+                    <h1 class="admin-title">Dashboard</h1>
+                    <button class="btn btn-primary" onclick="showAddPost()">
+                        <i class="fas fa-plus"></i> New Post
+                    </button>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="totalPosts">0</h3>
+                        <p>Total Posts</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="totalViews">0</h3>
+                        <p>Total Views</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="totalSubscribers">0</h3>
+                        <p>Subscribers</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="todaysPosts">0</h3>
+                        <p>Today's Posts</p>
+                    </div>
+                </div>
+                
+                <div class="admin-table">
+                    <h3 style="padding: 20px; margin: 0;">Recent Posts</h3>
+                    <div id="recentPostsTable">
+                        Loading...
+                    </div>
+                </div>
+            `;
+            
+            // Load stats
+            loadDashboardStats();
+        }
+        
+        async function loadDashboardStats() {
+            const postsRef = database.ref('blog/posts');
+            const subscribersRef = database.ref('newsletter/subscribers');
+            
+            postsRef.once('value').then((snapshot) => {
+                const posts = snapshot.val() || {};
+                const postArray = Object.values(posts);
+                
+                // Total posts
+                document.getElementById('totalPosts').textContent = postArray.length;
+                
+                // Total views
+                const totalViews = postArray.reduce((sum, post) => sum + (post.views || 0), 0);
+                document.getElementById('totalViews').textContent = totalViews.toLocaleString();
+                
+                // Today's posts
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const todaysPosts = postArray.filter(post => {
+                    const postDate = new Date(post.timestamp);
+                    return postDate >= today;
+                });
+                document.getElementById('todaysPosts').textContent = todaysPosts.length;
+                
+                // Recent posts table
+                const recentPosts = postArray
+                    .sort((a, b) => b.timestamp - a.timestamp)
+                    .slice(0, 5);
+                
+                document.getElementById('recentPostsTable').innerHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Views</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${recentPosts.map(post => `
+                                <tr>
+                                    <td>${post.title}</td>
+                                    <td>${post.category || 'Uncategorized'}</td>
+                                    <td>${post.views || 0}</td>
+                                    <td>${formatDate(post.timestamp)}</td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <button class="btn-sm btn-view" onclick="viewPost('${post.id}')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn-sm btn-edit" onclick="editPost('${post.id}')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-sm btn-delete" onclick="deletePost('${post.id}')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            });
+            
+            // Subscribers count
+            subscribersRef.once('value').then((snapshot) => {
+                const subscribers = snapshot.val() || {};
+                document.getElementById('totalSubscribers').textContent = Object.keys(subscribers).length;
+            });
+        }
+        
+        // All Posts
+        async function loadAllPosts() {
+            const adminContent = document.getElementById('adminContent');
+            adminContent.innerHTML = `
+                <div class="admin-header">
+                    <h1 class="admin-title">All Posts</h1>
+                    <button class="btn btn-primary" onclick="showAddPost()">
+                        <i class="fas fa-plus"></i> New Post
+                    </button>
+                </div>
+                
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Views</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody">
+                            Loading...
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            loadPostsTable();
+        }
+        
+        async function loadPostsTable() {
+            const postsRef = database.ref('blog/posts');
+            
+            postsRef.orderByChild('timestamp').once('value').then((snapshot) => {
+                const posts = snapshot.val() || {};
+                const postArray = Object.entries(posts).map(([id, post]) => ({
+                    id,
+                    ...post
+                })).reverse();
+                
+                document.getElementById('postsTableBody').innerHTML = postArray.map(post => `
+                    <tr>
+                        <td>${post.title}</td>
+                        <td>${post.category || 'Uncategorized'}</td>
+                        <td>${post.views || 0}</td>
+                        <td>
+                            <span style="color: ${post.published ? '#10b981' : '#f59e0b'};">
+                                ${post.published ? 'Published' : 'Draft'}
+                            </span>
+                        </td>
+                        <td>${formatDate(post.timestamp)}</td>
+                        <td>
+                            <div class="table-actions">
+                                <button class="btn-sm btn-view" onclick="viewPost('${post.id}')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-sm btn-edit" onclick="editPost('${post.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-sm btn-delete" onclick="deletePost('${post.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            });
+        }
+        
+        // Add/Edit Post Form
+        async function loadAddPostForm(postId = null) {
+            const adminContent = document.getElementById('adminContent');
+            let post = null;
+            
+            if (postId) {
+                // Load existing post for editing
+                const postRef = database.ref(`blog/posts/${postId}`);
+                const snapshot = await postRef.once('value');
+                post = snapshot.val();
+                if (post) post.id = postId;
+            }
+            
+            adminContent.innerHTML = `
+                <div class="admin-header">
+                    <h1 class="admin-title">${post ? 'Edit Post' : 'Add New Post'}</h1>
+                    <button class="btn btn-secondary" onclick="showAllPosts()">
+                        <i class="fas fa-arrow-left"></i> Back to Posts
+                    </button>
+                </div>
+                
+                <div class="form-container">
+                    <form id="postForm" onsubmit="savePost(event)">
+                        <input type="hidden" id="postId" value="${post?.id || ''}">
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="postTitle">Post Title *</label>
+                            <input type="text" id="postTitle" class="form-control" 
+                                   value="${post?.title || ''}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="postSlug">URL Slug</label>
+                            <input type="text" id="postSlug" class="form-control" 
+                                   value="${post?.slug || ''}" placeholder="auto-generates-from-title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="postCategory">Category *</label>
+                            <select id="postCategory" class="form-control" required>
+                                <option value="">Select Category</option>
+                                <option value="Wiring" ${post?.category === 'Wiring' ? 'selected' : ''}>Wiring</option>
+                                <option value="EV Chargers" ${post?.category === 'EV Chargers' ? 'selected' : ''}>EV Chargers</option>
+                                <option value="Safety" ${post?.category === 'Safety' ? 'selected' : ''}>Safety</option>
+                                <option value="Lighting" ${post?.category === 'Lighting' ? 'selected' : ''}>Lighting</option>
+                                <option value="Maintenance" ${post?.category === 'Maintenance' ? 'selected' : ''}>Maintenance</option>
+                                <option value="Updates" ${post?.category === 'Updates' ? 'selected' : ''}>Updates</option>
+                            </select>
+                            <small>Or <a href="#" onclick="addNewCategory()">add new category</a></small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="postExcerpt">Excerpt (Short Description) *</label>
+                            <textarea id="postExcerpt" class="form-control" required>${post?.excerpt || ''}</textarea>
+                            <small>Appears in blog listing (max 160 characters)</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Featured Image</label>
+                            <div class="image-upload" onclick="document.getElementById('imageUpload').click()">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click to upload or paste image URL</p>
+                                <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                                <input type="text" id="imageUrl" class="form-control mt-3" 
+                                       value="${post?.imageUrl || ''}" placeholder="Or paste image URL here">
+                                <img id="imagePreview" src="${post?.imageUrl || ''}" alt="Preview">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="postContent">Content *</label>
+                            <div class="editor-toolbar">
+                                <button type="button" onclick="formatText('bold')"><b>B</b></button>
+                                <button type="button" onclick="formatText('italic')"><i>I</i></button>
+                                <button type="button" onclick="formatText('underline')"><u>U</u></button>
+                                <button type="button" onclick="formatText('h2')">H2</button>
+                                <button type="button" onclick="formatText('h3')">H3</button>
+                                <button type="button" onclick="formatText('ul')">• List</button>
+                            </div>
+                            <textarea id="postContent" class="form-control" required>${post?.content || ''}</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="postAuthor">Author</label>
+                            <input type="text" id="postAuthor" class="form-control" 
+                                   value="${post?.author || 'SHUKLA-ELECTRICALS Team'}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="readTime">Read Time (minutes)</label>
+                            <input type="number" id="readTime" class="form-control" 
+                                   value="${post?.readTime || 5}" min="1" max="60">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-check-label">
+                                <input type="checkbox" id="postPublished" ${post?.published !== false ? 'checked' : ''}>
+                                Publish immediately
+                            </label>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="showAllPosts()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> ${post ? 'Update Post' : 'Publish Post'}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            // Update image preview if URL exists
+            if (post?.imageUrl) {
+                document.getElementById('imagePreview').style.display = 'block';
+            }
+        }
+        
+        // Save Post
+        async function savePost(event) {
+            event.preventDefault();
+            
+            const postId = document.getElementById('postId').value;
+            const postData = {
+                title: document.getElementById('postTitle').value.trim(),
+                slug: document.getElementById('postSlug').value.trim() || 
+                      document.getElementById('postTitle').value.trim().toLowerCase().replace(/\s+/g, '-'),
+                category: document.getElementById('postCategory').value,
+                excerpt: document.getElementById('postExcerpt').value.trim(),
+                imageUrl: document.getElementById('imageUrl').value.trim(),
+                content: document.getElementById('postContent').value.trim(),
+                author: document.getElementById('postAuthor').value.trim(),
+                readTime: parseInt(document.getElementById('readTime').value) || 5,
+                published: document.getElementById('postPublished').checked,
+                timestamp: postId ? undefined : Date.now(),
+                updatedAt: Date.now()
+            };
+            
+            try {
+                const postsRef = database.ref('blog/posts');
+                
+                if (postId) {
+                    // Update existing post
+                    await postsRef.child(postId).update(postData);
+                    showToast('Post updated successfully!', 'success');
+                } else {
+                    // Add new post
+                    const newPostRef = postsRef.push();
+                    await newPostRef.set({
+                        ...postData,
+                        views: 0,
+                        createdAt: Date.now()
+                    });
+                    showToast('Post published successfully!', 'success');
+                }
+                
+                setTimeout(() => showAllPosts(), 1500);
+            } catch (error) {
+                console.error('Error saving post:', error);
+                showToast('Error saving post. Please try again.', 'error');
+            }
+        }
+        
+        // Edit Post
+        function editPost(postId) {
+            loadAddPostForm(postId);
+        }
+        
+        // View Post
+        function viewPost(postId) {
+            window.open(`blog-post.html?id=${postId}`, '_blank');
+        }
+        
+        // Delete Post
+        async function deletePost(postId) {
+            if (!confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
+                return;
+            }
+            
+            try {
+                await database.ref(`blog/posts/${postId}`).remove();
+                showToast('Post deleted successfully!', 'success');
+                loadPostsTable(); // Refresh the table
+            } catch (error) {
+                console.error('Error deleting post:', error);
+                showToast('Error deleting post. Please try again.', 'error');
+            }
+        }
+        
+        // Categories Management
+        async function loadCategories() {
+            const adminContent = document.getElementById('adminContent');
+            adminContent.innerHTML = `
+                <div class="admin-header">
+                    <h1 class="admin-title">Categories</h1>
+                    <button class="btn btn-primary" onclick="showAddCategoryModal()">
+                        <i class="fas fa-plus"></i> Add Category
+                    </button>
+                </div>
+                
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th>Description</th>
+                                <th>Post Count</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoriesTableBody">
+                            Loading...
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            loadCategoriesTable();
+        }
+        
+        async function loadCategoriesTable() {
+            const postsRef = database.ref('blog/posts');
+            
+            postsRef.once('value').then((snapshot) => {
+                const posts = snapshot.val() || {};
+                const categories = {};
+                
+                // Count posts per category
+                Object.values(posts).forEach(post => {
+                    const category = post.category || 'Uncategorized';
+                    if (!categories[category]) {
+                        categories[category] = {
+                            name: category,
+                            slug: category.toLowerCase().replace(/\s+/g, '-'),
+                            count: 0
+                        };
+                    }
+                    categories[category].count++;
+                });
+                
+                document.getElementById('categoriesTableBody').innerHTML = 
+                    Object.values(categories).map(cat => `
+                        <tr>
+                            <td>${cat.name}</td>
+                            <td>${cat.slug}</td>
+                            <td>-</td>
+                            <td>${cat.count}</td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="btn-sm btn-edit" onclick="editCategory('${cat.name}')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('');
+            });
+        }
+        
+        // Subscribers Management
+        async function loadSubscribers() {
+            const adminContent = document.getElementById('adminContent');
+            adminContent.innerHTML = `
+                <div class="admin-header">
+                    <h1 class="admin-title">Newsletter Subscribers</h1>
+                    <button class="btn btn-primary" onclick="exportSubscribers()">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+                
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Subscribed On</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subscribersTableBody">
+                            Loading...
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            loadSubscribersTable();
+        }
+        
+        async function loadSubscribersTable() {
+            const subscribersRef = database.ref('newsletter/subscribers');
+            
+            subscribersRef.once('value').then((snapshot) => {
+                const subscribers = snapshot.val() || {};
+                
+                document.getElementById('subscribersTableBody').innerHTML = 
+                    Object.entries(subscribers).map(([id, subscriber]) => `
+                        <tr>
+                            <td>${subscriber.email}</td>
+                            <td>${formatDate(subscriber.timestamp)}</td>
+                            <td>
+                                <span style="color: ${subscriber.subscribed !== false ? '#10b981' : '#64748b'}">
+                                    ${subscriber.subscribed !== false ? 'Active' : 'Inactive'}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="btn-sm btn-delete" onclick="deleteSubscriber('${id}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('');
+            });
+        }
+        
+        // Helper Functions
+        function formatText(command) {
+            const textarea = document.getElementById('postContent');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            let formattedText = selectedText;
+            
+            switch(command) {
+                case 'bold':
+                    formattedText = `<strong>${selectedText}</strong>`;
+                    break;
+                case 'italic':
+                    formattedText = `<em>${selectedText}</em>`;
+                    break;
+                case 'underline':
+                    formattedText = `<u>${selectedText}</u>`;
+                    break;
+                case 'h2':
+                    formattedText = `<h2>${selectedText}</h2>`;
+                    break;
+                case 'h3':
+                    formattedText = `<h3>${selectedText}</h3>`;
+                    break;
+                case 'ul':
+                    const lines = selectedText.split('\n');
+                    formattedText = '<ul>\n' + lines.map(line => `  <li>${line}</li>`).join('\n') + '\n</ul>';
+                    break;
+            }
+            
+            textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
+            textarea.focus();
+            textarea.selectionStart = textarea.selectionEnd = start + formattedText.length;
+        }
+        
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // For Firebase Storage, you would upload the file here
+            // For simplicity, we'll just show a message
+            showToast('Image uploaded! Paste the URL in the field below.', 'success');
+            
+            // In a real app, you would:
+            // 1. Upload to Firebase Storage
+            // 2. Get the download URL
+            // 3. Set it in the imageUrl field
+        }
+        
+        function showToast(message, type = 'success') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Remove toast after 5 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+        
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+        
+        function logout() {
+            auth.signOut().then(() => {
+                window.location.href = 'admin-login.html';
+            });
+        }
+        
+        // Auto-generate slug from title
+        document.addEventListener('input', (e) => {
+            if (e.target.id === 'postTitle' && !document.getElementById('postSlug').value) {
+                const slug = e.target.value
+                    .toLowerCase()
+                    .replace(/[^\w\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/--+/g, '-');
+                document.getElementById('postSlug').value = slug;
+            }
+        });
+    </script>
+</body>
+</html>
