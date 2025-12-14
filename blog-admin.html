@@ -294,7 +294,6 @@
         #postContent {
             min-height: 300px;
             border-radius: 0 0 8px 8px;
-            font-family: monospace;
             line-height: 1.6;
         }
         
@@ -500,9 +499,12 @@
             color: #e2e8f0;
         }
         
-        /* Image preview handling */
-        #imageUrl {
-            margin-top: 15px;
+        /* Debug buttons */
+        .debug-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
         }
     </style>
 </head>
@@ -545,6 +547,10 @@
             <!-- Content will be loaded dynamically -->
             <div class="loading-spinner">
                 <div class="spinner"></div>
+                <div style="margin-left: 20px;">
+                    <h4>Loading Admin Panel...</h4>
+                    <p id="loadingMessage">Initializing system</p>
+                </div>
             </div>
         </main>
     </div>
@@ -558,7 +564,9 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     
     <script>
-        // Firebase Configuration
+        // ==============================================
+        // FIREBASE CONFIGURATION
+        // ==============================================
         const firebaseConfig = {
             apiKey: "AIzaSyDGpagCpskeOxzVO4C5qgdVUTeWO8rUZUU",
             authDomain: "electrician-830b2.firebaseapp.com",
@@ -570,24 +578,61 @@
         };
         
         // Initialize Firebase
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
+        let database, auth;
+        try {
+            // Check if Firebase is already initialized
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            database = firebase.database();
+            auth = firebase.auth();
+            
+            console.log("✅ Firebase initialized successfully");
+            updateLoadingMessage("Firebase connected");
+        } catch (error) {
+            console.error("❌ Firebase initialization failed:", error);
+            showToast(`Firebase Error: ${error.message}`, "error");
+            updateLoadingMessage("Firebase connection failed");
         }
-        const database = firebase.database();
-        const auth = firebase.auth();
         
+        // ==============================================
+        // GLOBAL VARIABLES
+        // ==============================================
+        let currentUser = null;
+        
+        // ==============================================
+        // AUTHENTICATION
+        // ==============================================
         // Check Authentication
         auth.onAuthStateChanged((user) => {
             if (user) {
-                // User is signed in
-                showDashboard();
+                currentUser = user;
+                console.log("✅ User authenticated:", user.email);
+                updateLoadingMessage("User authenticated");
+                
+                // Show dashboard after a short delay
+                setTimeout(() => {
+                    showDashboard();
+                }, 500);
             } else {
-                // User is signed out, redirect to login
+                console.log("❌ No user signed in, redirecting to login");
                 window.location.href = 'admin-login.html';
             }
         });
         
-        // Navigation Functions
+        // ==============================================
+        // LOADING MESSAGE HELPER
+        // ==============================================
+        function updateLoadingMessage(message) {
+            const loadingMessage = document.getElementById('loadingMessage');
+            if (loadingMessage) {
+                loadingMessage.textContent = message;
+            }
+        }
+        
+        // ==============================================
+        // NAVIGATION FUNCTIONS
+        // ==============================================
         function showDashboard() {
             setActiveNav('navDashboard');
             loadDashboard();
@@ -614,19 +659,18 @@
         }
         
         function setActiveNav(navId) {
-            // Remove active class from all nav items
             document.querySelectorAll('.admin-nav a').forEach(link => {
                 link.classList.remove('active');
             });
-            
-            // Add active class to clicked nav item
             const activeNav = document.getElementById(navId);
             if (activeNav) {
                 activeNav.classList.add('active');
             }
         }
         
-        // Dashboard
+        // ==============================================
+        // DASHBOARD
+        // ==============================================
         async function loadDashboard() {
             const adminContent = document.getElementById('adminContent');
             adminContent.innerHTML = `
@@ -664,9 +708,17 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="debug-buttons">
+                    <button class="btn btn-warning btn-sm" onclick="testDatabaseConnection()">
+                        <i class="fas fa-bug"></i> Test Connection
+                    </button>
+                    <button class="btn btn-info btn-sm" onclick="clearAllData()">
+                        <i class="fas fa-trash"></i> Clear Test Data
+                    </button>
+                </div>
             `;
             
-            // Load stats
             loadDashboardStats();
         }
         
@@ -705,7 +757,7 @@
                 
                 // Recent posts table
                 const recentPosts = postArray
-                    .sort((a, b) => b.timestamp - a.timestamp)
+                    .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
                     .slice(0, 5);
                 
                 if (recentPosts.length > 0) {
@@ -730,13 +782,13 @@
                                         <td>
                                             <div class="table-actions">
                                                 <button class="btn-sm btn-view" onclick="viewPost('${post.id}')">
-                                                    <i class="fas fa-eye"></i> View
+                                                    <i class="fas fa-eye"></i>
                                                 </button>
                                                 <button class="btn-sm btn-edit" onclick="editPost('${post.id}')">
-                                                    <i class="fas fa-edit"></i> Edit
+                                                    <i class="fas fa-edit"></i>
                                                 </button>
                                                 <button class="btn-sm btn-delete" onclick="deletePost('${post.id}')">
-                                                    <i class="fas fa-trash"></i> Delete
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </div>
                                         </td>
@@ -751,17 +803,22 @@
                             <i class="fas fa-newspaper"></i>
                             <h3>No Posts Yet</h3>
                             <p>Create your first blog post to get started!</p>
+                            <button class="btn btn-primary mt-3" onclick="showAddPost()">
+                                <i class="fas fa-plus"></i> Create First Post
+                            </button>
                         </div>
                     `;
                 }
                 
             } catch (error) {
                 console.error('Error loading dashboard stats:', error);
-                showToast('Error loading dashboard data', 'error');
+                showToast('Error loading dashboard data: ' + error.message, 'error');
             }
         }
         
-        // All Posts
+        // ==============================================
+        // ALL POSTS
+        // ==============================================
         async function loadAllPosts() {
             const adminContent = document.getElementById('adminContent');
             adminContent.innerHTML = `
@@ -805,13 +862,14 @@
         async function loadPostsTable() {
             try {
                 const postsRef = database.ref('blog/posts');
-                const snapshot = await postsRef.orderByChild('timestamp').once('value');
+                const snapshot = await postsRef.once('value');
                 const posts = snapshot.val() || {};
                 
+                // Convert to array and sort by timestamp
                 const postArray = Object.entries(posts).map(([id, post]) => ({
                     id,
                     ...post
-                })).reverse();
+                })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                 
                 if (postArray.length > 0) {
                     document.getElementById('postsTableBody').innerHTML = postArray.map(post => `
@@ -858,11 +916,13 @@
                 }
             } catch (error) {
                 console.error('Error loading posts:', error);
-                showToast('Error loading posts', 'error');
+                showToast('Error loading posts: ' + error.message, 'error');
             }
         }
         
-        // Add/Edit Post Form
+        // ==============================================
+        // ADD/EDIT POST FORM - FIXED VERSION
+        // ==============================================
         async function loadAddPostForm(postId = null) {
             const adminContent = document.getElementById('adminContent');
             let post = null;
@@ -875,20 +935,20 @@
                     if (post) post.id = postId;
                 } catch (error) {
                     console.error('Error loading post:', error);
-                    showToast('Error loading post', 'error');
+                    showToast('Error loading post: ' + error.message, 'error');
                 }
             }
             
             adminContent.innerHTML = `
                 <div class="admin-header">
                     <h1 class="admin-title">${post ? 'Edit Post' : 'Add New Post'}</h1>
-                    <button class="btn btn-secondary" onclick="showAllPosts()">
+                    <button type="button" class="btn btn-secondary" onclick="showAllPosts()">
                         <i class="fas fa-arrow-left"></i> Back to Posts
                     </button>
                 </div>
                 
                 <div class="form-container">
-                    <form id="postForm" onsubmit="savePost(event)">
+                    <form id="postForm">
                         <input type="hidden" id="postId" value="${post?.id || ''}">
                         
                         <div class="form-group">
@@ -929,18 +989,17 @@
                         
                         <div class="form-group">
                             <label class="form-label">Featured Image</label>
-                            <div class="image-upload">
+                            <div class="image-upload" onclick="document.getElementById('imageUpload').click()">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p>Click to upload or paste image URL</p>
                                 <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
                                 <input type="text" id="imageUrl" class="form-control mt-3" 
                                        value="${post?.imageUrl || ''}" 
-                                       placeholder="Paste image URL here (e.g., https://example.com/image.jpg)"
-                                       onchange="updateImagePreview(this.value)">
+                                       placeholder="Paste image URL here (e.g., https://example.com/image.jpg)">
                                 ${post?.imageUrl ? `
-                                    <img id="imagePreview" src="${post.imageUrl}" alt="Preview" style="display: block;">
+                                    <img id="imagePreview" src="${post.imageUrl}" alt="Preview" class="mt-3" style="max-width: 100%; max-height: 300px; border-radius: 8px; display: block;">
                                 ` : `
-                                    <img id="imagePreview" alt="Preview">
+                                    <img id="imagePreview" alt="Preview" class="mt-3" style="max-width: 100%; max-height: 300px; border-radius: 8px; display: none;">
                                 `}
                             </div>
                         </div>
@@ -956,7 +1015,7 @@
                                 <button type="button" onclick="formatText('ol')"><i class="fas fa-list-ol"></i></button>
                             </div>
                             <textarea id="postContent" class="form-control" required 
-                                      placeholder="Write your blog post content here...">${post?.content || ''}</textarea>
+                                      placeholder="Write your blog post content here..." rows="15">${post?.content || ''}</textarea>
                         </div>
                         
                         <div class="form-group">
@@ -973,17 +1032,22 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-check-label" style="display: flex; align-items: center; gap: 10px;">
-                                <input type="checkbox" id="postPublished" ${post?.published !== false ? 'checked' : ''}>
-                                Publish immediately
-                            </label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="postPublished" ${post?.published !== false ? 'checked' : ''}>
+                                <label class="form-check-label" for="postPublished">
+                                    Publish immediately
+                                </label>
+                            </div>
                         </div>
                         
                         <div class="form-actions">
                             <button type="button" class="btn btn-secondary" onclick="showAllPosts()">
                                 Cancel
                             </button>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="button" class="btn btn-success" onclick="testSavePost()">
+                                <i class="fas fa-vial"></i> Test Save
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="savePost()" id="savePostBtn">
                                 <i class="fas fa-save"></i> ${post ? 'Update Post' : 'Publish Post'}
                             </button>
                         </div>
@@ -992,123 +1056,219 @@
             `;
             
             // Setup auto-slug generation
-            document.getElementById('postTitle').addEventListener('input', function(e) {
-                if (!document.getElementById('postSlug').value) {
-                    const slug = e.target.value
-                        .toLowerCase()
-                        .replace(/[^a-z0-9\s-]/g, '')
-                        .replace(/\s+/g, '-')
-                        .replace(/-+/g, '-');
-                    document.getElementById('postSlug').value = slug;
-                }
-            });
+            setupAutoSlug();
             
-            // Setup image URL preview
-            document.getElementById('imageUrl').addEventListener('input', function(e) {
-                updateImagePreview(e.target.value);
-            });
+            // Setup image preview
+            setupImagePreview();
         }
         
-        // Update image preview
-        function updateImagePreview(url) {
-            const preview = document.getElementById('imagePreview');
-            if (url && url.startsWith('http')) {
-                preview.src = url;
-                preview.style.display = 'block';
-            } else {
-                preview.style.display = 'none';
-            }
-        }
-        
-        // Save Post
-        async function savePost(event) {
-            event.preventDefault();
+        // ==============================================
+        // SAVE POST FUNCTION - FIXED VERSION
+        // ==============================================
+        async function savePost() {
+            console.log("💾 Save post function called");
             
+            // Get form values
             const postId = document.getElementById('postId').value;
+            const title = document.getElementById('postTitle').value.trim();
+            const slug = document.getElementById('postSlug').value.trim();
+            const category = document.getElementById('postCategory').value;
+            const excerpt = document.getElementById('postExcerpt').value.trim();
+            const imageUrl = document.getElementById('imageUrl').value.trim();
+            const content = document.getElementById('postContent').value.trim();
+            const author = document.getElementById('postAuthor').value.trim();
+            const readTime = parseInt(document.getElementById('readTime').value) || 5;
+            const published = document.getElementById('postPublished').checked;
+            
+            console.log("📋 Form values:", { 
+                postId, title, category, excerpt, content, published 
+            });
+            
+            // Validate required fields
+            if (!title) {
+                showToast('Please enter a post title', 'error');
+                document.getElementById('postTitle').focus();
+                return;
+            }
+            
+            if (!category) {
+                showToast('Please select a category', 'error');
+                document.getElementById('postCategory').focus();
+                return;
+            }
+            
+            if (!excerpt) {
+                showToast('Please enter an excerpt', 'error');
+                document.getElementById('postExcerpt').focus();
+                return;
+            }
+            
+            if (!content) {
+                showToast('Please enter post content', 'error');
+                document.getElementById('postContent').focus();
+                return;
+            }
+            
+            // Prepare post data
             const postData = {
-                title: document.getElementById('postTitle').value.trim(),
-                slug: document.getElementById('postSlug').value.trim() || 
-                      document.getElementById('postTitle').value.trim().toLowerCase().replace(/\s+/g, '-'),
-                category: document.getElementById('postCategory').value,
-                excerpt: document.getElementById('postExcerpt').value.trim(),
-                imageUrl: document.getElementById('imageUrl').value.trim(),
-                content: document.getElementById('postContent').value.trim(),
-                author: document.getElementById('postAuthor').value.trim(),
-                readTime: parseInt(document.getElementById('readTime').value) || 5,
-                published: document.getElementById('postPublished').checked,
+                title: title,
+                slug: slug || generateSlug(title),
+                category: category,
+                excerpt: excerpt.substring(0, 160),
+                imageUrl: imageUrl,
+                content: content,
+                author: author || 'SHUKLA-ELECTRICALS Team',
+                readTime: readTime,
+                published: published,
                 updatedAt: Date.now()
             };
             
-            // Validate required fields
-            if (!postData.title || !postData.category || !postData.excerpt || !postData.content) {
-                showToast('Please fill all required fields', 'error');
-                return;
-            }
+            console.log("📦 Post data prepared:", postData);
+            
+            // Show loading state
+            const saveBtn = document.getElementById('savePostBtn');
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            saveBtn.disabled = true;
             
             try {
                 const postsRef = database.ref('blog/posts');
                 
                 if (postId) {
                     // Update existing post
+                    console.log("🔄 Updating post with ID:", postId);
                     await postsRef.child(postId).update(postData);
+                    console.log("✅ Post updated successfully");
                     showToast('Post updated successfully!', 'success');
                 } else {
-                    // Add new post
+                    // Create new post
+                    console.log("🆕 Creating new post");
                     const newPostRef = postsRef.push();
                     const newPostId = newPostRef.key;
                     
-                    await newPostRef.set({
+                    const newPost = {
                         ...postData,
                         id: newPostId,
                         views: 0,
                         timestamp: Date.now(),
                         createdAt: Date.now()
-                    });
+                    };
                     
+                    console.log("📝 New post data:", newPost);
+                    
+                    await newPostRef.set(newPost);
+                    console.log("✅ Post created successfully");
                     showToast('Post published successfully!', 'success');
                 }
                 
-                // Redirect to all posts after delay
-                setTimeout(() => showAllPosts(), 1500);
+                // Redirect to all posts after a short delay
+                setTimeout(() => {
+                    showAllPosts();
+                }, 1500);
+                
             } catch (error) {
-                console.error('Error saving post:', error);
-                showToast('Error saving post. Please try again.', 'error');
+                console.error("❌ Error saving post:", error);
+                console.error("❌ Error details:", error.message, error.code);
+                showToast(`Error saving post: ${error.message}`, 'error');
+                
+                // Re-enable save button
+                saveBtn.innerHTML = originalText;
+                saveBtn.disabled = false;
             }
         }
         
-        // Edit Post
+        // ==============================================
+        // TEST SAVE FUNCTION
+        // ==============================================
+        async function testSavePost() {
+            console.log("🧪 Test save function called");
+            
+            const testData = {
+                title: 'Test Post ' + new Date().toLocaleTimeString(),
+                slug: 'test-post-' + Date.now(),
+                category: 'Testing',
+                excerpt: 'This is a test post created for debugging.',
+                content: '<p>This is test content to verify that the save functionality is working properly.</p>',
+                author: 'Test User',
+                readTime: 3,
+                published: true,
+                timestamp: Date.now(),
+                views: 0,
+                createdAt: Date.now(),
+                updatedAt: Date.now()
+            };
+            
+            console.log("🧪 Test data:", testData);
+            
+            try {
+                const testRef = database.ref('blog/posts').push();
+                await testRef.set(testData);
+                
+                console.log("✅ Test save successful!");
+                showToast('Test save successful! Check database.', 'success');
+                
+                // Refresh posts table
+                setTimeout(() => {
+                    if (document.getElementById('postsTableBody')) {
+                        loadPostsTable();
+                    }
+                }, 1000);
+                
+            } catch (error) {
+                console.error("❌ Test save failed:", error);
+                showToast(`Test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        // ==============================================
+        // EDIT POST
+        // ==============================================
         function editPost(postId) {
-            showAddPost(); // Set nav active
+            console.log("✏️ Editing post:", postId);
+            showAddPost();
+            // Load the post data into form
             loadAddPostForm(postId);
         }
         
-        // View Post
+        // ==============================================
+        // VIEW POST
+        // ==============================================
         function viewPost(postId) {
+            console.log("👁️ Viewing post:", postId);
             window.open(`blog-post.html?id=${postId}`, '_blank');
         }
         
-        // Delete Post
+        // ==============================================
+        // DELETE POST
+        // ==============================================
         async function deletePost(postId) {
             if (!confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
                 return;
             }
             
+            console.log("🗑️ Deleting post:", postId);
+            
             try {
                 await database.ref(`blog/posts/${postId}`).remove();
+                console.log("✅ Post deleted successfully");
                 showToast('Post deleted successfully!', 'success');
+                
                 // Refresh the current view
                 if (document.getElementById('postsTableBody')) {
                     loadPostsTable();
                 } else {
                     showAllPosts();
                 }
+                
             } catch (error) {
-                console.error('Error deleting post:', error);
-                showToast('Error deleting post. Please try again.', 'error');
+                console.error("❌ Error deleting post:", error);
+                showToast('Error deleting post: ' + error.message, 'error');
             }
         }
         
-        // Categories Management
+        // ==============================================
+        // CATEGORIES MANAGEMENT
+        // ==============================================
         async function loadCategories() {
             const adminContent = document.getElementById('adminContent');
             adminContent.innerHTML = `
@@ -1159,7 +1319,7 @@
                     if (!categories[category]) {
                         categories[category] = {
                             name: category,
-                            slug: category.toLowerCase().replace(/\s+/g, '-'),
+                            slug: generateSlug(category),
                             count: 0
                         };
                     }
@@ -1179,7 +1339,7 @@
                                 <td>
                                     <div class="table-actions">
                                         <button class="btn-sm btn-edit" onclick="editCategory('${cat.name}')">
-                                            <i class="fas fa-edit"></i> Edit
+                                            <i class="fas fa-edit"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -1200,11 +1360,10 @@
                 }
             } catch (error) {
                 console.error('Error loading categories:', error);
-                showToast('Error loading categories', 'error');
+                showToast('Error loading categories: ' + error.message, 'error');
             }
         }
         
-        // Add new category
         function addNewCategory() {
             const categoryName = prompt('Enter new category name:');
             if (categoryName && categoryName.trim()) {
@@ -1212,7 +1371,16 @@
             }
         }
         
-        // Subscribers Management
+        function editCategory(categoryName) {
+            const newName = prompt('Edit category name:', categoryName);
+            if (newName && newName.trim() && newName !== categoryName) {
+                showToast(`Category renamed to "${newName}". Update posts manually.`, 'success');
+            }
+        }
+        
+        // ==============================================
+        // SUBSCRIBERS MANAGEMENT
+        // ==============================================
         async function loadSubscribers() {
             const adminContent = document.getElementById('adminContent');
             adminContent.innerHTML = `
@@ -1271,7 +1439,7 @@
                                 <td>
                                     <div class="table-actions">
                                         <button class="btn-sm btn-delete" onclick="deleteSubscriber('${id}')">
-                                            <i class="fas fa-trash"></i> Remove
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -1292,11 +1460,10 @@
                 }
             } catch (error) {
                 console.error('Error loading subscribers:', error);
-                showToast('Error loading subscribers', 'error');
+                showToast('Error loading subscribers: ' + error.message, 'error');
             }
         }
         
-        // Delete Subscriber
         async function deleteSubscriber(subscriberId) {
             if (!confirm('Are you sure you want to remove this subscriber?')) {
                 return;
@@ -1308,11 +1475,10 @@
                 loadSubscribersTable();
             } catch (error) {
                 console.error('Error deleting subscriber:', error);
-                showToast('Error removing subscriber', 'error');
+                showToast('Error removing subscriber: ' + error.message, 'error');
             }
         }
         
-        // Export Subscribers (CSV)
         async function exportSubscribers() {
             try {
                 const subscribersRef = database.ref('newsletter/subscribers');
@@ -1324,7 +1490,7 @@
                 Object.values(subscribers).forEach(subscriber => {
                     const date = formatDate(subscriber.timestamp);
                     const status = subscriber.subscribed !== false ? 'Active' : 'Inactive';
-                    csvContent += `${subscriber.email},${date},${status}\n`;
+                    csvContent += `"${subscriber.email}","${date}","${status}"\n`;
                 });
                 
                 const encodedUri = encodeURI(csvContent);
@@ -1338,11 +1504,21 @@
                 showToast('Subscribers exported successfully!', 'success');
             } catch (error) {
                 console.error('Error exporting subscribers:', error);
-                showToast('Error exporting subscribers', 'error');
+                showToast('Error exporting subscribers: ' + error.message, 'error');
             }
         }
         
-        // Text formatting helper
+        // ==============================================
+        // HELPER FUNCTIONS
+        // ==============================================
+        function generateSlug(text) {
+            return text.toLowerCase()
+                .replace(/[^\w\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/--+/g, '-')
+                .trim();
+        }
+        
         function formatText(command) {
             const textarea = document.getElementById('postContent');
             const start = textarea.selectionStart;
@@ -1378,39 +1554,46 @@
             textarea.selectionStart = textarea.selectionEnd = start + formattedText.length;
         }
         
-        // Image upload handler
         function handleImageUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
             
-            // Show file info
             showToast(`Selected file: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`, 'success');
             
-            // In a real app, you would upload to Firebase Storage here
-            // For now, we'll just show a message
+            // In a real app, upload to Firebase Storage
             document.getElementById('imageUrl').value = 'Upload functionality coming soon...';
             document.getElementById('imageUrl').focus();
         }
         
-        // Show Toast Notification
-        function showToast(message, type = 'success') {
-            const toastContainer = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                <span>${message}</span>
-            `;
+        function setupAutoSlug() {
+            const titleInput = document.getElementById('postTitle');
+            const slugInput = document.getElementById('postSlug');
             
-            toastContainer.appendChild(toast);
-            
-            // Remove toast after 5 seconds
-            setTimeout(() => {
-                toast.remove();
-            }, 5000);
+            if (titleInput && slugInput) {
+                titleInput.addEventListener('input', function(e) {
+                    if (!slugInput.value) {
+                        slugInput.value = generateSlug(e.target.value);
+                    }
+                });
+            }
         }
         
-        // Format date
+        function setupImagePreview() {
+            const imageUrlInput = document.getElementById('imageUrl');
+            const imagePreview = document.getElementById('imagePreview');
+            
+            if (imageUrlInput && imagePreview) {
+                imageUrlInput.addEventListener('input', function(e) {
+                    if (e.target.value && e.target.value.startsWith('http')) {
+                        imagePreview.src = e.target.value;
+                        imagePreview.style.display = 'block';
+                    } else {
+                        imagePreview.style.display = 'none';
+                    }
+                });
+            }
+        }
+        
         function formatDate(timestamp) {
             if (!timestamp) return 'N/A';
             const date = new Date(timestamp);
@@ -1423,28 +1606,103 @@
             });
         }
         
-        // Logout
-        function logout() {
-            auth.signOut().then(() => {
-                window.location.href = 'admin-login.html';
-            }).catch(error => {
-                console.error('Logout error:', error);
-                showToast('Error logging out', 'error');
-            });
+        function showToast(message, type = 'success') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const icon = type === 'success' ? 'check-circle' : 
+                        type === 'error' ? 'exclamation-circle' : 'info-circle';
+            
+            toast.innerHTML = `
+                <i class="fas fa-${icon}"></i>
+                <span>${message}</span>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Remove toast after 5 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
         }
         
-        // Initialize image URL preview
-        function initImagePreview() {
-            const imageUrlInput = document.getElementById('imageUrl');
-            if (imageUrlInput) {
-                imageUrlInput.addEventListener('input', function(e) {
-                    updateImagePreview(e.target.value);
-                });
+        // ==============================================
+        // DEBUG FUNCTIONS
+        // ==============================================
+        async function testDatabaseConnection() {
+            console.log("🔍 Testing database connection...");
+            
+            try {
+                const testRef = database.ref('test_connection');
+                const testData = {
+                    timestamp: Date.now(),
+                    test: 'connection_test',
+                    user: currentUser?.email || 'unknown'
+                };
+                
+                await testRef.set(testData);
+                console.log("✅ Database connection test successful");
+                showToast('Database connection successful!', 'success');
+                
+                // Read back the data
+                const snapshot = await testRef.once('value');
+                console.log("📖 Test data read back:", snapshot.val());
+                
+                // Clean up after 3 seconds
+                setTimeout(() => {
+                    testRef.remove();
+                    console.log("🧹 Test data cleaned up");
+                }, 3000);
+                
+            } catch (error) {
+                console.error("❌ Database connection test failed:", error);
+                showToast(`Database test failed: ${error.message}`, 'error');
             }
         }
         
-        // Call init on DOM ready
-        document.addEventListener('DOMContentLoaded', initImagePreview);
+        async function clearAllData() {
+            if (!confirm('WARNING: This will delete ALL blog posts and subscribers. Are you sure?')) {
+                return;
+            }
+            
+            console.log("🧹 Clearing all data...");
+            
+            try {
+                await database.ref('blog/posts').remove();
+                await database.ref('newsletter/subscribers').remove();
+                
+                console.log("✅ All data cleared");
+                showToast('All data cleared successfully!', 'success');
+                
+                // Refresh current view
+                if (document.getElementById('postsTableBody')) {
+                    loadPostsTable();
+                }
+                
+            } catch (error) {
+                console.error("❌ Error clearing data:", error);
+                showToast(`Error clearing data: ${error.message}`, 'error');
+            }
+        }
+        
+        // ==============================================
+        // LOGOUT
+        // ==============================================
+        function logout() {
+            auth.signOut().then(() => {
+                console.log("👋 User logged out");
+                window.location.href = 'admin-login.html';
+            }).catch(error => {
+                console.error('Logout error:', error);
+                showToast('Error logging out: ' + error.message, 'error');
+            });
+        }
+        
+        // ==============================================
+        // INITIALIZATION
+        // ==============================================
+        console.log("🚀 Admin panel initialized");
         
     </script>
 </body>
