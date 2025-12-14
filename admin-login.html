@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - SHUKLA-ELECTRICALS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #10b981;
+            --dark: #0f172a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .login-logo i {
+            color: var(--primary);
+        }
+        
+        .login-header h1 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .login-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .login-btn:hover {
+            background: #059669;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-logo">
+                <i class="fas fa-bolt"></i>
+                <span>SHUKLA-ELECTRICALS</span>
+            </div>
+            <h1>Admin Login</h1>
+            <p>Access the blog management dashboard</p>
+        </div>
+        
+        <form id="loginForm" onsubmit="login(event)">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" required>
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                Invalid email or password
+            </div>
+            
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+        </form>
+        
+        <div class="back-link">
+            <a href="index.html">← Back to Website</a>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDGpagCpskeOxzVO4C5qgdVUTeWO8rUZUU",
+            authDomain: "electrician-830b2.firebaseapp.com",
+            projectId: "electrician-830b2",
+            storageBucket: "electrician-830b2.firebasestorage.app",
+            messagingSenderId: "1053791458330",
+            appId: "1:1053791458330:web:fdbf5befa79aef2376eda3"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        
+        // Admin credentials (in production, use Firebase Auth with custom claims)
+        const ADMIN_EMAIL = "admin@shuklaelectricals.com";
+        const ADMIN_PASSWORD = "admin123"; // Change this in production
+        
+        async function login(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.login-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Try to sign in with Firebase Auth
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                
+                // For demo purposes, also allow our admin credentials
+                if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+                    // Create user if doesn't exist
+                    try {
+                        await auth.createUserWithEmailAndPassword(email, password);
+                    } catch (error) {
+                        // User might already exist
+                        if (error.code !== 'auth/email-already-in-use') {
+                            throw error;
+                        }
+                    }
+                }
+                
+                // Successful login
+                window.location.href = 'blog-admin.html';
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                errorMessage.style.display = 'block';
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+        
+        // Allow Enter key to submit form
+        document.getElementById('password').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                login(e);
+            }
+        });
+    </script>
+</body>
+</html>
