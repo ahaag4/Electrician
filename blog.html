@@ -1,1 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical Blog - SHUKLA-ELECTRICALS | Tips, Guides & Updates</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Expert electrical tips, wiring guides, EV charger information, and electrical safety articles from certified electricians at SHUKLA-ELECTRICALS.">
+    <meta name="keywords" content="electrical blog, wiring tips, EV charger guide, electrical safety, home wiring, meter cabin setup, electrical maintenance">
+    <meta name="author" content="SHUKLA-ELECTRICALS">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shuklaelectricals.com/blog">
+    <meta property="og:title" content="Electrical Blog - SHUKLA-ELECTRICALS">
+    <meta property="og:description" content="Professional electrical tips and guides from certified electricians.">
+    <meta property="og:image" content="https://shuklaelectricals.com/assets/blog-og.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://shuklaelectricals.com/blog">
+    <meta property="twitter:title" content="Electrical Blog - SHUKLA-ELECTRICALS">
+    <meta property="twitter:description" content="Professional electrical tips and guides from certified electricians.">
+    <meta property="twitter:image" content="https://shuklaelectricals.com/assets/blog-twitter.jpg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #10b981;
+            --secondary: #059669;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background: var(--light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--dark), #1e293b);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .navbar-brand i {
+            color: var(--accent);
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem !important;
+            border-radius: 6px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent) !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Blog Hero */
+        .blog-hero {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(245, 158, 11, 0.05));
+            padding: 80px 0 60px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .blog-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .blog-hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Blog Layout */
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        /* Blog Posts Grid */
+        .blog-posts {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .blog-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .blog-image img {
+            transform: scale(1.05);
+        }
+        
+        .blog-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .blog-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .blog-title:hover {
+            color: var(--primary);
+        }
+        
+        .blog-excerpt {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .read-more:hover {
+            color: var(--secondary);
+        }
+        
+        .blog-stats {
+            display: flex;
+            gap: 15px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .sidebar-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .categories-list {
+            list-style: none;
+        }
+        
+        .categories-list li {
+            margin-bottom: 10px;
+        }
+        
+        .categories-list a {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 8px 0;
+            transition: all 0.3s;
+        }
+        
+        .categories-list a:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+        
+        .categories-list .count {
+            background: var(--light);
+            color: var(--text-light);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+        
+        .recent-posts {
+            list-style: none;
+        }
+        
+        .recent-post {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .recent-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .recent-post-img {
+            width: 80px;
+            height: 60px;
+            border-radius: 6px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .recent-post-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .recent-post-content h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        
+        .recent-post-content h4 a {
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        
+        .recent-post-content h4 a:hover {
+            color: var(--primary);
+        }
+        
+        .recent-post-content .date {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        /* Newsletter */
+        .newsletter-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .newsletter-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-box p {
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .newsletter-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-input input:focus {
+            outline: none;
+        }
+        
+        .subscribe-btn {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .subscribe-btn:hover {
+            background: #1e293b;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 50px 0;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .page-btn:hover, .page-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: #cbd5e1;
+            padding: 60px 20px 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+                margin-top: 40px;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .blog-image {
+                height: 200px;
+            }
+            
+            .newsletter-input {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .blog-hero {
+                padding: 60px 0 40px;
+            }
+            
+            .blog-content {
+                padding: 20px;
+            }
+            
+            .blog-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .blog-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-bolt"></i> SHUKLA-ELECTRICALS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html"><i class="fas fa-cog"></i> Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>Electrical Insights & Guides</h1>
+            <p>Expert tips, safety guidelines, and latest updates from certified electricians</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="blog-layout">
+            <!-- Blog Posts -->
+            <main class="blog-posts" id="blogPosts">
+                <!-- Posts will be loaded dynamically -->
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                </div>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Search Box -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Search Articles</h3>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search electrical topics...">
+                        <button class="search-btn" onclick="searchBlog()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Categories</h3>
+                    <ul class="categories-list" id="categoriesList">
+                        <!-- Categories will be loaded dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Recent Posts -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Recent Posts</h3>
+                    <ul class="recent-posts" id="recentPosts">
+                        <!-- Recent posts will be loaded dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="newsletter-box">
+                    <h3>Stay Updated</h3>
+                    <p>Get electrical safety tips and updates directly in your inbox</p>
+                    <div class="newsletter-input">
+                        <input type="email" id="newsletterEmail" placeholder="Your email address">
+                        <button class="subscribe-btn" onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <!-- Pagination will be loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>SHUKLA-ELECTRICALS</h3>
+                <p>Professional electrician services with 15+ years experience. Certified, insured, and committed to safety and quality workmanship.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://wa.me/919876543210"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Electrical Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Popular Articles</h3>
+                <ul class="footer-links" id="popularPosts">
+                    <!-- Popular posts will be loaded dynamically -->
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-envelope"></i> contact@shuklaelectricals.com</li>
+                    <li><i class="fas fa-clock"></i> 24/7 Emergency Service</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Delhi NCR, India</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2024 SHUKLA-ELECTRICALS. All Rights Reserved. | <a href="privacy.html" style="color: #94a3b8;">Privacy Policy</a> | <a href="terms.html" style="color: #94a3b8;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDGpagCpskeOxzVO4C5qgdVUTeWO8rUZUU",
+            authDomain: "electrician-830b2.firebaseapp.com",
+            databaseURL: "https://electrician-830b2-default-rtdb.firebaseio.com",
+            projectId: "electrician-830b2",
+            storageBucket: "electrician-830b2.firebasestorage.app",
+            messagingSenderId: "1053791458330",
+            appId: "1:1053791458330:web:fdbf5befa79aef2376eda3"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Blog System Variables
+        let currentPage = 1;
+        const postsPerPage = 6;
+        let allPosts = [];
+        let filteredPosts = [];
+
+        // DOM Elements
+        const blogPostsContainer = document.getElementById('blogPosts');
+        const categoriesList = document.getElementById('categoriesList');
+        const recentPostsContainer = document.getElementById('recentPosts');
+        const popularPostsContainer = document.getElementById('popularPosts');
+        const paginationContainer = document.getElementById('pagination');
+        const searchInput = document.getElementById('searchInput');
+
+        // Load Blog Data
+        function loadBlogData() {
+            const blogRef = database.ref('blog/posts');
+            
+            blogRef.orderByChild('timestamp').on('value', (snapshot) => {
+                const posts = snapshot.val();
+                if (posts) {
+                    // Convert object to array and reverse for newest first
+                    allPosts = Object.entries(posts).map(([id, post]) => ({
+                        id,
+                        ...post
+                    })).reverse();
+                    
+                    filteredPosts = [...allPosts];
+                    renderBlogPosts();
+                    updateCategories();
+                    updateRecentPosts();
+                    updatePopularPosts();
+                    renderPagination();
+                } else {
+                    blogPostsContainer.innerHTML = `
+                        <div class="blog-card">
+                            <div class="blog-content">
+                                <h3 class="blog-title">No Articles Yet</h3>
+                                <p class="blog-excerpt">Check back soon for electrical tips and guides.</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Render Blog Posts
+        function renderBlogPosts() {
+            const startIndex = (currentPage - 1) * postsPerPage;
+            const endIndex = startIndex + postsPerPage;
+            const currentPosts = filteredPosts.slice(startIndex, endIndex);
+            
+            if (currentPosts.length === 0) {
+                blogPostsContainer.innerHTML = `
+                    <div class="blog-card">
+                        <div class="blog-content">
+                            <h3 class="blog-title">No matching articles found</h3>
+                            <p class="blog-excerpt">Try a different search term or browse our categories.</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            blogPostsContainer.innerHTML = currentPosts.map(post => `
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="${post.imageUrl || 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" 
+                             alt="${post.title}">
+                        <span class="blog-category">${post.category || 'Electrical'}</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">
+                            <i class="far fa-calendar"></i> ${formatDate(post.timestamp)}
+                        </div>
+                        <a href="blog-post.html?id=${post.id}" class="blog-title">${post.title}</a>
+                        <p class="blog-excerpt">${post.excerpt || post.content.substring(0, 150)}...</p>
+                        <div class="blog-meta">
+                            <a href="blog-post.html?id=${post.id}" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="blog-stats">
+                                <span><i class="far fa-eye"></i> ${post.views || 0}</span>
+                                <span><i class="far fa-clock"></i> ${post.readTime || '5 min'}</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // Update Categories
+        function updateCategories() {
+            const categories = {};
+            allPosts.forEach(post => {
+                const category = post.category || 'Uncategorized';
+                categories[category] = (categories[category] || 0) + 1;
+            });
+            
+            categoriesList.innerHTML = Object.entries(categories).map(([category, count]) => `
+                <li>
+                    <a href="#" onclick="filterByCategory('${category}'); return false;">
+                        ${category}
+                        <span class="count">${count}</span>
+                    </a>
+                </li>
+            `).join('');
+            
+            // Add "All" category
+            categoriesList.innerHTML = `
+                <li>
+                    <a href="#" onclick="clearFilters(); return false;">
+                        All Articles
+                        <span class="count">${allPosts.length}</span>
+                    </a>
+                </li>
+            ` + categoriesList.innerHTML;
+        }
+
+        // Update Recent Posts
+        function updateRecentPosts() {
+            const recentPosts = allPosts.slice(0, 5);
+            recentPostsContainer.innerHTML = recentPosts.map(post => `
+                <li class="recent-post">
+                    <div class="recent-post-img">
+                        <img src="${post.imageUrl || 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'}" 
+                             alt="${post.title}">
+                    </div>
+                    <div class="recent-post-content">
+                        <h4><a href="blog-post.html?id=${post.id}">${post.title}</a></h4>
+                        <div class="date">${formatDate(post.timestamp)}</div>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        // Update Popular Posts
+        function updatePopularPosts() {
+            const popularPosts = [...allPosts]
+                .sort((a, b) => (b.views || 0) - (a.views || 0))
+                .slice(0, 5);
+            
+            popularPostsContainer.innerHTML = popularPosts.map(post => `
+                <li><a href="blog-post.html?id=${post.id}">${post.title}</a></li>
+            `).join('');
+        }
+
+        // Render Pagination
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+            
+            if (totalPages <= 1) {
+                paginationContainer.innerHTML = '';
+                return;
+            }
+            
+            let paginationHTML = '';
+            
+            // Previous button
+            if (currentPage > 1) {
+                paginationHTML += `
+                    <a href="#" class="page-btn" onclick="changePage(${currentPage - 1}); return false;">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                `;
+            }
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    paginationHTML += `<a href="#" class="page-btn active">${i}</a>`;
+                } else if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    paginationHTML += `
+                        <a href="#" class="page-btn" onclick="changePage(${i}); return false;">${i}</a>
+                    `;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    paginationHTML += `<span class="page-btn">...</span>`;
+                }
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                paginationHTML += `
+                    <a href="#" class="page-btn" onclick="changePage(${currentPage + 1}); return false;">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                `;
+            }
+            
+            paginationContainer.innerHTML = paginationHTML;
+        }
+
+        // Search Functionality
+        function searchBlog() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredPosts = [...allPosts];
+            } else {
+                filteredPosts = allPosts.filter(post => 
+                    post.title.toLowerCase().includes(searchTerm) ||
+                    post.content.toLowerCase().includes(searchTerm) ||
+                    post.excerpt.toLowerCase().includes(searchTerm) ||
+                    (post.category && post.category.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            currentPage = 1;
+            renderBlogPosts();
+            renderPagination();
+        }
+
+        // Filter by Category
+        function filterByCategory(category) {
+            if (category === 'All') {
+                filteredPosts = [...allPosts];
+            } else {
+                filteredPosts = allPosts.filter(post => post.category === category);
+            }
+            
+            currentPage = 1;
+            renderBlogPosts();
+            renderPagination();
+        }
+
+        // Clear Filters
+        function clearFilters() {
+            filteredPosts = [...allPosts];
+            searchInput.value = '';
+            currentPage = 1;
+            renderBlogPosts();
+            renderPagination();
+        }
+
+        // Change Page
+        function changePage(page) {
+            currentPage = page;
+            renderBlogPosts();
+            renderPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Subscribe to Newsletter
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletterEmail').value.trim();
+            
+            if (!email || !validateEmail(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            const newsletterRef = database.ref('newsletter/subscribers');
+            newsletterRef.push({
+                email: email,
+                timestamp: Date.now(),
+                subscribed: true
+            })
+            .then(() => {
+                alert('Thank you for subscribing!');
+                document.getElementById('newsletterEmail').value = '';
+            })
+            .catch(error => {
+                console.error('Error subscribing:', error);
+                alert('Subscription failed. Please try again.');
+            });
+        }
+
+        // Helper Functions
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Search on Enter key
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchBlog();
+            }
+        });
+
+        // Initialize Blog
+        document.addEventListener('DOMContentLoaded', loadBlogData);
+    </script>
+</body>
+      </html>
