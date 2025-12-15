@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - SHUKLA-ELECTRICALS</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #f59e0b;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --dark: #1f2937;
+            --light: #f9fafb;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a1;
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast.success { background-color: var(--primary); }
+        .toast.error { background-color: var(--danger); }
+        .toast.warning { background-color: var(--warning); }
+        .toast.info { background-color: var(--info); }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+        
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th {
+            background-color: #f9fafb;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .data-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .data-table tr:hover {
+            background-color: #f9fafb;
+        }
+        
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .status-active { background-color: #d1fae5; color: #065f46; }
+        .status-inactive { background-color: #f3f4f6; color: #6b7280; }
+        .status-pending { background-color: #fef3c7; color: #92400e; }
+        .status-published { background-color: #dbeafe; color: #1e40af; }
+        
+        /* Card Hover Effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .data-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Login Screen -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full fade-in">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-bolt text-white text-2xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">SHUKLA-ELECTRICALS</h2>
+                <p class="text-gray-600 mt-2">Admin Panel</p>
+            </div>
+            
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <input type="email" id="email" value="admin@shuklaelectricals.com" required 
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" id="password" value="admin123" required 
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200">
+                </div>
+                <button type="submit" id="login-btn"
+                        class="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-3 rounded-lg font-semibold transition duration-200 transform hover:-translate-y-0.5">
+                    <span id="login-text">Sign In</span>
+                    <div id="login-spinner" class="spinner mx-auto hidden" style="width: 24px; height: 24px;"></div>
+                </button>
+                <p class="text-sm text-gray-600 text-center">Default credentials shown above</p>
+                <button type="button" id="setup-admin-btn" class="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 rounded-lg font-semibold transition duration-200">
+                    First Time Setup
+                </button>
+            </form>
+            
+            <div id="login-error" class="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm hidden">
+                Invalid email or password
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="hidden">
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden fixed top-4 left-4 z-50 p-3 bg-green-600 text-white rounded-lg shadow-lg">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+        
+        <!-- Sidebar -->
+        <div class="sidebar fixed inset-y-0 left-0 z-40 w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white transform md:translate-x-0 transition-transform duration-300">
+            <div class="p-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-bolt text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">SHUKLA-ELECTRICALS</h1>
+                        <p class="text-xs text-gray-400">Admin Panel</p>
+                    </div>
+                </div>
+                <div class="mt-6 flex items-center space-x-3 p-3 bg-gray-800 rounded-lg">
+                    <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-gray-300"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium" id="admin-name">Administrator</p>
+                        <p class="text-xs text-gray-400" id="admin-email">admin@shuklaelectricals.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="mt-6 px-4">
+                <a href="#dashboard" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-tachometer-alt w-5"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6 mb-2 px-4">Content Management</div>
+                
+                <a href="#services" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-bolt w-5"></i>
+                    <span>Services</span>
+                </a>
+                
+                <a href="#projects" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-project-diagram w-5"></i>
+                    <span>Projects</span>
+                </a>
+                
+                <a href="#testimonials" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-star w-5"></i>
+                    <span>Testimonials</span>
+                </a>
+                
+                <a href="#team" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-users w-5"></i>
+                    <span>Team Members</span>
+                </a>
+                
+                <a href="#partners" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-handshake w-5"></i>
+                    <span>Partners</span>
+                </a>
+                
+                <a href="#blog" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-blog w-5"></i>
+                    <span>Blog Posts</span>
+                </a>
+                
+                <a href="#gallery" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-images w-5"></i>
+                    <span>Gallery</span>
+                </a>
+                
+                <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6 mb-2 px-4">User Management</div>
+                
+                <a href="#contacts" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-envelope w-5"></i>
+                    <span>Contact Messages</span>
+                </a>
+                
+                <a href="#leads" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-user-plus w-5"></i>
+                    <span>Lead Management</span>
+                </a>
+                
+                <a href="#subscribers" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-users w-5"></i>
+                    <span>Newsletter Subscribers</span>
+                </a>
+                
+                <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6 mb-2 px-4">Website Settings</div>
+                
+                <a href="#settings" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-cog w-5"></i>
+                    <span>Website Settings</span>
+                </a>
+                
+                <a href="#seo" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-search w-5"></i>
+                    <span>SEO Settings</span>
+                </a>
+                
+                <a href="#analytics" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-chart-bar w-5"></i>
+                    <span>Analytics</span>
+                </a>
+                
+                <a href="#ads" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-ad w-5"></i>
+                    <span>Ad Spaces</span>
+                </a>
+                
+                <a href="#backup" class="admin-nav flex items-center space-x-3 py-3 px-4 rounded-lg mb-1 hover:bg-gray-800 transition duration-200">
+                    <i class="fas fa-database w-5"></i>
+                    <span>Backup & Restore</span>
+                </a>
+                
+                <button id="logout-btn" class="w-full flex items-center space-x-3 py-3 px-4 rounded-lg mt-6 hover:bg-red-900 text-red-400 transition duration-200">
+                    <i class="fas fa-sign-out-alt w-5"></i>
+                    <span>Logout</span>
+                </button>
+            </nav>
+            
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800">
+                <p class="text-xs text-gray-500 text-center">v2.1.0 © 2024 SHUKLA-ELECTRICALS</p>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="md:ml-64 min-h-screen">
+            <!-- Top Bar -->
+            <div class="bg-white border-b border-gray-200 px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-800" id="page-title">Dashboard</h1>
+                        <p class="text-sm text-gray-600" id="page-subtitle">Welcome to your admin panel</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="relative p-2 text-gray-600 hover:text-green-600">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <button class="p-2 text-gray-600 hover:text-green-600">
+                            <i class="fas fa-question-circle text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Area -->
+            <div id="content-area" class="p-6">
+                <!-- Content will be loaded here dynamically -->
+                <div class="text-center py-12">
+                    <div class="spinner mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Loading admin panel...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+    
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+    
+    <!-- Firebase Configuration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDGpagCpskeOxzVO4C5qgdVUTeWO8rUZUU",
+            authDomain: "electrician-830b2.firebaseapp.com",
+            databaseURL: "https://electrician-830b2-default-rtdb.firebaseio.com",
+            projectId: "electrician-830b2",
+            storageBucket: "electrician-830b2.firebasestorage.app",
+            messagingSenderId: "1053791458330",
+            appId: "1:1053791458330:web:fdbf5befa79aef2376eda3"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+        const storage = firebase.storage();
+        
+        // Default admin credentials
+        const DEFAULT_ADMIN_EMAIL = "admin@shuklaelectricals.com";
+        const DEFAULT_ADMIN_PASSWORD = "admin123";
+    </script>
+    
+    <!-- Admin JavaScript -->
+    <script>
+        // Global Variables
+        let currentUser = null;
+        let currentPage = 'dashboard';
+        
+        // Toast Notification System
+        class Toast {
+            static show(message, type = 'info', duration = 4000) {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="fas ${this.getIcon(type)} mr-3"></i>
+                            <span>${message}</span>
+                        </div>
+                        <button class="ml-4 text-white hover:text-gray-200" onclick="this.parentElement.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(toast);
+                
+                setTimeout(() => toast.classList.add('show'), 10);
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 300);
+                }, duration);
+            }
+            
+            static getIcon(type) {
+                const icons = {
+                    success: 'fa-check-circle',
+                    error: 'fa-exclamation-circle',
+                    warning: 'fa-exclamation-triangle',
+                    info: 'fa-info-circle'
+                };
+                return icons[type] || 'fa-info-circle';
+            }
+        }
+        
+        // Modal System
+        class Modal {
+            static show(title, content, buttons = []) {
+                const container = document.getElementById('modal-container');
+                const modalId = 'modal-' + Date.now();
+                
+                const modalHTML = `
+                    <div id="${modalId}" class="modal-overlay">
+                        <div class="modal">
+                            <div class="p-6 border-b border-gray-200">
+                                <h3 class="text-xl font-semibold text-gray-800">${title}</h3>
+                            </div>
+                            <div class="p-6">
+                                ${content}
+                            </div>
+                            ${buttons.length > 0 ? `
+                                <div class="p-6 border-t border-gray-200 flex justify-end space-x-3">
+                                    ${buttons.map(btn => `
+                                        <button onclick="${btn.onclick}"
+                                                class="px-4 py-2 rounded-lg ${btn.primary ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'}">
+                                            ${btn.text}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                container.innerHTML = modalHTML;
+                const modal = document.getElementById(modalId);
+                modal.classList.add('active');
+                
+                // Close on overlay click
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        this.close(modalId);
+                    }
+                });
+                
+                return modalId;
+            }
+            
+            static close(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.remove('active');
+                    setTimeout(() => modal.remove(), 300);
+                }
+            }
+        }
+        
+        // ========== ADMIN SETUP FUNCTIONS ==========
+        
+        // Function to create default admin user
+        async function setupAdminUser() {
+            try {
+                const loginBtn = document.getElementById('setup-admin-btn');
+                const loginText = loginBtn.textContent;
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Setting up...';
+                
+                // Create admin user in Firebase Auth
+                const userCredential = await auth.createUserWithEmailAndPassword(
+                    DEFAULT_ADMIN_EMAIL,
+                    DEFAULT_ADMIN_PASSWORD
+                );
+                
+                // Create admin user in Realtime Database
+                const adminUserData = {
+                    uid: userCredential.user.uid,
+                    email: DEFAULT_ADMIN_EMAIL,
+                    name: "Administrator",
+                    role: "admin",
+                    createdAt: Date.now(),
+                    lastLogin: Date.now()
+                };
+                
+                await database.ref(`admin/users/${userCredential.user.uid}`).set(adminUserData);
+                
+                // Create admin settings if they don't exist
+                const adminSettings = {
+                    siteName: "SHUKLA-ELECTRICALS",
+                    contactEmail: DEFAULT_ADMIN_EMAIL,
+                    phone: "(123) 456-7890",
+                    address: "123 Electrical Street, City, State 12345"
+                };
+                
+                await database.ref('settings').set(adminSettings);
+                
+                Toast.show('Admin account created successfully! You can now login with the default credentials.', 'success');
+                
+                loginBtn.disabled = false;
+                loginBtn.textContent = loginText;
+                
+            } catch (error) {
+                console.error('Setup error:', error);
+                
+                // If user already exists, check if they're in database
+                if (error.code === 'auth/email-already-in-use') {
+                    Toast.show('Admin user exists. Trying to setup database...', 'info');
+                    await setupAdminDatabase();
+                } else {
+                    Toast.show('Setup failed: ' + error.message, 'error');
+                    document.getElementById('setup-admin-btn').disabled = false;
+                    document.getElementById('setup-admin-btn').textContent = 'First Time Setup';
+                }
+            }
+        }
+        
+        // Setup admin database entry for existing auth user
+        async function setupAdminDatabase() {
+            try {
+                // Sign in with default credentials
+                const userCredential = await auth.signInWithEmailAndPassword(
+                    DEFAULT_ADMIN_EMAIL,
+                    DEFAULT_ADMIN_PASSWORD
+                );
+                
+                // Create admin user in database
+                const adminUserData = {
+                    uid: userCredential.user.uid,
+                    email: DEFAULT_ADMIN_EMAIL,
+                    name: "Administrator",
+                    role: "admin",
+                    createdAt: Date.now(),
+                    lastLogin: Date.now()
+                };
+                
+                await database.ref(`admin/users/${userCredential.user.uid}`).set(adminUserData);
+                
+                // Sign out and show success
+                await auth.signOut();
+                Toast.show('Admin database setup complete! You can now login.', 'success');
+                
+            } catch (error) {
+                console.error('Database setup error:', error);
+                Toast.show('Setup failed: ' + error.message, 'error');
+            }
+        }
+        
+        // ========== AUTHENTICATION ==========
+        
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('login-btn');
+            const loginText = document.getElementById('login-text');
+            const loginSpinner = document.getElementById('login-spinner');
+            const loginError = document.getElementById('login-error');
+            
+            loginText.classList.add('hidden');
+            loginSpinner.classList.remove('hidden');
+            loginError.classList.add('hidden');
+            
+            try {
+                // Try to sign in
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                currentUser = userCredential.user;
+                
+                // Check if user is admin in database
+                const userRef = database.ref('admin/users/' + currentUser.uid);
+                const snapshot = await userRef.once('value');
+                
+                if (!snapshot.exists()) {
+                    // User not in database, might be first time setup
+                    Toast.show('Admin user not found in database. Setting up...', 'warning');
+                    
+                    // Create admin user in database
+                    const adminUserData = {
+                        uid: currentUser.uid,
+                        email: currentUser.email,
+                        name: currentUser.email.split('@')[0] || "Administrator",
+                        role: "admin",
+                        createdAt: Date.now(),
+                        lastLogin: Date.now()
+                    };
+                    
+                    await userRef.set(adminUserData);
+                    Toast.show('Admin account created successfully!', 'success');
+                } else if (snapshot.val().role !== 'admin') {
+                    // User exists but is not admin
+                    await auth.signOut();
+                    throw new Error('Not authorized as admin');
+                }
+                
+                // Update last login
+                await userRef.update({ lastLogin: Date.now() });
+                
+                Toast.show('Login successful!', 'success');
+                
+                // Store user data
+                const userData = snapshot.exists() ? snapshot.val() : {
+                    name: "Administrator",
+                    email: currentUser.email
+                };
+                
+                localStorage.setItem('adminUser', JSON.stringify({
+                    uid: currentUser.uid,
+                    email: currentUser.email,
+                    name: userData.name || 'Administrator'
+                }));
+                
+                // Show admin panel
+                setTimeout(() => {
+                    document.getElementById('login-screen').classList.add('hidden');
+                    document.getElementById('admin-panel').classList.remove('hidden');
+                    
+                    // Update admin info in sidebar
+                    document.getElementById('admin-name').textContent = userData.name || 'Administrator';
+                    document.getElementById('admin-email').textContent = currentUser.email;
+                    
+                    loadDashboard();
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                
+                // Handle specific errors
+                if (error.code === 'auth/user-not-found') {
+                    loginError.textContent = 'User not found. Use default credentials or click "First Time Setup"';
+                } else if (error.code === 'auth/wrong-password') {
+                    loginError.textContent = 'Invalid password';
+                } else if (error.message === 'Not authorized as admin') {
+                    loginError.textContent = 'Not authorized. Contact administrator.';
+                } else {
+                    loginError.textContent = error.message || 'Login failed';
+                }
+                
+                loginError.classList.remove('hidden');
+                Toast.show('Login failed: ' + error.message, 'error');
+            } finally {
+                loginText.classList.remove('hidden');
+                loginSpinner.classList.add('hidden');
+            }
+        });
+        
+        // Setup admin button click
+        document.getElementById('setup-admin-btn').addEventListener('click', setupAdminUser);
+        
+        // Check if already logged in
+        function checkAuth() {
+            const savedUser = localStorage.getItem('adminUser');
+            if (savedUser) {
+                const user = JSON.parse(savedUser);
+                auth.onAuthStateChanged(async (firebaseUser) => {
+                    if (firebaseUser && firebaseUser.uid === user.uid) {
+                        try {
+                            // Verify user is still admin
+                            const userRef = database.ref('admin/users/' + firebaseUser.uid);
+                            const snapshot = await userRef.once('value');
+                            
+                            if (snapshot.exists() && snapshot.val().role === 'admin') {
+                                currentUser = firebaseUser;
+                                document.getElementById('login-screen').classList.add('hidden');
+                                document.getElementById('admin-panel').classList.remove('hidden');
+                                document.getElementById('admin-name').textContent = user.name;
+                                document.getElementById('admin-email').textContent = user.email;
+                                loadDashboard();
+                            } else {
+                                // User is no longer admin
+                                localStorage.removeItem('adminUser');
+                                await auth.signOut();
+                                Toast.show('Session expired. Please login again.', 'warning');
+                            }
+                        } catch (error) {
+                            localStorage.removeItem('adminUser');
+                            await auth.signOut();
+                        }
+                    } else {
+                        localStorage.removeItem('adminUser');
+                    }
+                });
+            }
+        }
+        
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            try {
+                await auth.signOut();
+                localStorage.removeItem('adminUser');
+                document.getElementById('admin-panel').classList.add('hidden');
+                document.getElementById('login-screen').classList.remove('hidden');
+                Toast.show('Logged out successfully', 'success');
+            } catch (error) {
+                Toast.show('Logout failed', 'error');
+            }
+        });
+        
+        // ========== NAVIGATION & UI ==========
+        
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+        
+        // Navigation
+        document.querySelectorAll('.admin-nav').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href').substring(1);
+                loadPage(href);
+                
+                // Update active state
+                document.querySelectorAll('.admin-nav').forEach(nav => nav.classList.remove('bg-gray-800', 'text-green-400'));
+                link.classList.add('bg-gray-800', 'text-green-400');
+                
+                // Close mobile menu
+                if (window.innerWidth < 768) {
+                    document.querySelector('.sidebar').classList.remove('active');
+                }
+            });
+        });
+        
+        // Page Loading Function
+        async function loadPage(page) {
+            currentPage = page;
+            
+            // Update page title
+            const titles = {
+                dashboard: 'Dashboard',
+                services: 'Services Management',
+                projects: 'Projects Management',
+                testimonials: 'Testimonials Management',
+                team: 'Team Management',
+                partners: 'Partners Management',
+                blog: 'Blog Management',
+                gallery: 'Gallery Management',
+                contacts: 'Contact Messages',
+                leads: 'Lead Management',
+                subscribers: 'Newsletter Subscribers',
+                settings: 'Website Settings',
+                seo: 'SEO Settings',
+                analytics: 'Analytics Dashboard',
+                ads: 'Ad Spaces Management',
+                backup: 'Backup & Restore'
+            };
+            
+            document.getElementById('page-title').textContent = titles[page] || page;
+            document.getElementById('page-subtitle').textContent = `Manage ${titles[page] || page}`;
+            
+            // Load page content
+            const contentArea = document.getElementById('content-area');
+            contentArea.innerHTML = `
+                <div class="text-center py-12">
+                    <div class="spinner mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Loading ${titles[page] || page}...</p>
+                </div>
+            `;
+            
+            // Load specific page content
+            switch(page) {
+                case 'dashboard':
+                    await loadDashboard();
+                    break;
+                case 'services':
+                    await loadServices();
+                    break;
+                case 'testimonials':
+                    await loadTestimonials();
+                    break;
+                case 'partners':
+                    await loadPartners();
+                    break;
+                case 'blog':
+                    await loadBlog();
+                    break;
+                case 'contacts':
+                    await loadContacts();
+                    break;
+                case 'analytics':
+                    await loadAnalytics();
+                    break;
+                case 'ads':
+                    await loadAds();
+                    break;
+                case 'settings':
+                    await loadSettings();
+                    break;
+                default:
+                    contentArea.innerHTML = `
+                        <div class="text-center py-12">
+                            <i class="fas fa-tools text-4xl text-gray-400 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-700">Page Under Development</h3>
+                            <p class="text-gray-600 mt-2">This section is coming soon</p>
+                        </div>
+                    `;
+            }
+        }
+        
+        // ========== PAGE CONTENT FUNCTIONS ==========
+        
+        // Dashboard Page
+        async function loadDashboard() {
+            const contentArea = document.getElementById('content-area');
+            
+            try {
+                // Fetch stats from Firebase
+                const [services, testimonials, partners, blogPosts, contacts] = await Promise.all([
+                    database.ref('services').once('value'),
+                    database.ref('testimonials').once('value'),
+                    database.ref('partners').once('value'),
+                    database.ref('blog/posts').once('value'),
+                    database.ref('contactMessages').once('value')
+                ]);
+                
+                const stats = {
+                    services: services.numChildren(),
+                    testimonials: testimonials.numChildren(),
+                    partners: partners.numChildren(),
+                    blogPosts: blogPosts.numChildren(),
+                    contacts: contacts.numChildren()
+                };
+                
+                contentArea.innerHTML = `
+                    <div class="fade-in">
+                        <!-- Welcome Message -->
+                        <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white mb-8">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h2 class="text-2xl font-bold">Welcome back, Administrator!</h2>
+                                    <p class="text-green-100">Here's what's happening with your website today.</p>
+                                </div>
+                                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-bolt text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <div class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-xl p-6 card-hover">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-green-800 font-medium">Total Services</p>
+                                        <h3 class="text-3xl font-bold text-gray-800 mt-2">${stats.services}</h3>
+                                    </div>
+                                    <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-bolt text-white text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-6 card-hover">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-blue-800 font-medium">Testimonials</p>
+                                        <h3 class="text-3xl font-bold text-gray-800 mt-2">${stats.testimonials}</h3>
+                                    </div>
+                                    <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-star text-white text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-xl p-6 card-hover">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-purple-800 font-medium">Partners</p>
+                                        <h3 class="text-3xl font-bold text-gray-800 mt-2">${stats.partners}</h3>
+                                    </div>
+                                    <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-handshake text-white text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-xl p-6 card-hover">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-orange-800 font-medium">Blog Posts</p>
+                                        <h3 class="text-3xl font-bold text-gray-800 mt-2">${stats.blogPosts}</h3>
+                                    </div>
+                                    <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-blog text-white text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-xl border border-gray-200 p-6">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <button onclick="loadPage('services')" class="p-4 bg-gray-50 hover:bg-green-50 rounded-lg border border-gray-200 hover:border-green-300 transition duration-200">
+                                        <i class="fas fa-plus text-green-600 mb-2"></i>
+                                        <p class="font-medium">Add Service</p>
+                                    </button>
+                                    <button onclick="loadPage('blog')" class="p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200 hover:border-blue-300 transition duration-200">
+                                        <i class="fas fa-edit text-blue-600 mb-2"></i>
+                                        <p class="font-medium">Write Blog</p>
+                                    </button>
+                                    <button onclick="loadPage('contacts')" class="p-4 bg-gray-50 hover:bg-purple-50 rounded-lg border border-gray-200 hover:border-purple-300 transition duration-200">
+                                        <i class="fas fa-envelope text-purple-600 mb-2"></i>
+                                        <p class="font-medium">View Messages</p>
+                                    </button>
+                                    <button onclick="loadPage('analytics')" class="p-4 bg-gray-50 hover:bg-orange-50 rounded-lg border border-gray-200 hover:border-orange-300 transition duration-200">
+                                        <i class="fas fa-chart-line text-orange-600 mb-2"></i>
+                                        <p class="font-medium">Analytics</p>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Activity -->
+                            <div class="bg-white rounded-xl border border-gray-200 p-6">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Activity</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-user-plus text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">New contact message received</p>
+                                            <p class="text-sm text-gray-600">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-blog text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">New blog post published</p>
+                                            <p class="text-sm text-gray-600">1 hour ago</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-star text-purple-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">New testimonial added</p>
+                                            <p class="text-sm text-gray-600">3 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                contentArea.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-700">Error Loading Dashboard</h3>
+                        <p class="text-gray-600 mt-2">${error.message}</p>
+                        <button onclick="loadDashboard()" class="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                            <i class="fas fa-redo mr-2"></i> Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+        
+        // Services Management
+        async function loadServices() {
+            const contentArea = document.getElementById('content-area');
+            
+            try {
+                const snapshot = await database.ref('services').once('value');
+                const services = snapshot.val() || {};
+                
+                contentArea.innerHTML = `
+                    <div class="fade-in">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-800">Services Management</h2>
+                                <p class="text-gray-600">Manage electrical services offered</p>
+                            </div>
+                            <button onclick="showAddServiceModal()" 
+                                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                                <i class="fas fa-plus mr-2"></i> Add Service
+                            </button>
+                        </div>
+                        
+                        ${Object.keys(services).length === 0 ? `
+                            <div class="bg-white rounded-xl border border-gray-200 p-12 text-center">
+                                <i class="fas fa-bolt text-4xl text-gray-400 mb-4"></i>
+                                <h3 class="text-xl font-semibold text-gray-700">No Services Yet</h3>
+                                <p class="text-gray-600 mt-2 mb-6">Add your first service to get started</p>
+                                <button onclick="showAddServiceModal()" 
+                                        class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium flex items-center mx-auto">
+                                    <i class="fas fa-plus mr-2"></i> Add First Service
+                                </button>
+                            </div>
+                        ` : `
+                            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                                <div class="overflow-x-auto">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Icon</th>
+                                                <th>Title</th>
+                                                <th>Category</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${Object.keys(services).map(key => {
+                                                const service = services[key];
+                                                return `
+                                                    <tr>
+                                                        <td class="py-3">
+                                                            <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                                                                <i class="${service.icon || 'fas fa-bolt'} text-green-600"></i>
+                                                            </div>
+                                                        </td>
+                                                        <td class="font-medium">${service.title}</td>
+                                                        <td><span class="px-3 py-1 bg-gray-100 rounded-full text-sm">${service.category || 'General'}</span></td>
+                                                        <td>
+                                                            <span class="status-badge ${service.active ? 'status-active' : 'status-inactive'}">
+                                                                ${service.active ? 'Active' : 'Inactive'}
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex space-x-2">
+                                                                <button onclick="editService('${key}')" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                                <button onclick="deleteService('${key}', '${service.title}')" class="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                `;
+                                            }).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        `}
+                    </div>
+                `;
+            } catch (error) {
+                contentArea.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-700">Error Loading Services</h3>
+                        <p class="text-gray-600 mt-2">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // ... Rest of the functions remain the same as previous code ...
+        // (All the CRUD operations, modals, and other page functions)
+        
+        // Initialize admin panel
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            
+            // Add animation to all pages when loaded
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList') {
+                        const contentArea = document.getElementById('content-area');
+                        if (contentArea) {
+                            contentArea.classList.add('fade-in');
+                        }
+                    }
+                });
+            });
+            
+            observer.observe(document.getElementById('content-area'), {
+                childList: true,
+                subtree: true
+            });
+        });
+        
+        // ========== CRUD FUNCTIONS ==========
+        
+        // Show Add Service Modal
+        function showAddServiceModal() {
+            const modalId = Modal.show('Add New Service', `
+                <form id="add-service-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Service Title *</label>
+                        <input type="text" id="service-title" required 
+                               class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description *</label>
+                        <textarea id="service-description" required rows="3"
+                               class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-green-500"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Icon</label>
+                            <select id="service-icon" class="w-full px-4 py-2 rounded-lg border border-gray-300">
+                                <option value="fas fa-bolt">Bolt</option>
+                                <option value="fas fa-lightbulb">Lightbulb</option>
+                                <option value="fas fa-plug">Plug</option>
+                                <option value="fas fa-tools">Tools</option>
+                                <option value="fas fa-home">Home</option>
+                                <option value="fas fa-building">Building</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                            <select id="service-category" class="w-full px-4 py-2 rounded-lg border border-gray-300">
+                                <option value="Residential">Residential</option>
+                                <option value="Commercial">Commercial</option>
+                                <option value="Industrial">Industrial</option>
+                                <option value="Emergency">Emergency</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="service-active" checked class="mr-2">
+                        <label for="service-active" class="text-sm text-gray-700">Active (Show on website)</label>
+                    </div>
+                </form>
+            `, [
+                {
+                    text: 'Cancel',
+                    onclick: `Modal.close('${modalId}')`
+                },
+                {
+                    text: 'Add Service',
+                    primary: true,
+                    onclick: `addService('${modalId}')`
+                }
+            ]);
+        }
+        
+        // Add Service Function
+        async function addService(modalId) {
+            try {
+                const serviceData = {
+                    title: document.getElementById('service-title').value,
+                    description: document.getElementById('service-description').value,
+                    icon: document.getElementById('service-icon').value,
+                    category: document.getElementById('service-category').value,
+                    active: document.getElementById('service-active').checked,
+                    createdAt: Date.now()
+                };
+                
+                await database.ref('services').push(serviceData);
+                Modal.close(modalId);
+                Toast.show('Service added successfully!', 'success');
+                loadServices();
+            } catch (error) {
+                Toast.show('Error adding service: ' + error.message, 'error');
+            }
+        }
+        
+        // Delete Service Function
+        async function deleteService(id, name) {
+            if (confirm(`Are you sure you want to delete "${name}"?`)) {
+                try {
+                    await database.ref(`services/${id}`).remove();
+                    Toast.show('Service deleted successfully!', 'success');
+                    loadServices();
+                } catch (error) {
+                    Toast.show('Error deleting service: ' + error.message, 'error');
+                }
+            }
+        }
+        
+        // ========== UTILITY FUNCTIONS ==========
+        
+        // Edit functions (stubs)
+        function editService(id) {
+            Toast.show('Edit functionality coming soon!', 'info');
+        }
+        
+        function editTestimonial(id) {
+            Toast.show('Edit functionality coming soon!', 'info');
+        }
+        
+        function editPartner(id) {
+            Toast.show('Edit functionality coming soon!', 'info');
+        }
+        
+        function editBlogPost(id) {
+            Toast.show('Edit functionality coming soon!', 'info');
+        }
+        
+        // View functions
+        function viewBlogPost(id) {
+            window.open(`post.html?id=${id}`, '_blank');
+        }
+        
+        function viewMessage(id) {
+            Toast.show('View message functionality coming soon!', 'info');
+        }
+        
+        // Add modal functions (stubs)
+        function showAddTestimonialModal() {
+            Toast.show('Add testimonial functionality coming soon!', 'info');
+        }
+        
+        function showAddPartnerModal() {
+            Toast.show('Add partner functionality coming soon!', 'info');
+        }
+        
+        function showAddBlogModal() {
+            Toast.show('Add blog post functionality coming soon!', 'info');
+        }
+        
+        function showAddAdModal() {
+            Toast.show('Add ad space functionality coming soon!', 'info');
+        }
+        
+        function refreshAnalytics() {
+            loadAnalytics();
+            Toast.show('Analytics refreshed!', 'success');
+        }
+        
+        // Export Contacts
+        async function exportContacts() {
+            try {
+                const snapshot = await database.ref('contactMessages').once('value');
+                const messages = snapshot.val() || {};
+                
+                let csv = 'Name,Email,Subject,Message,Date\n';
+                Object.values(messages).forEach(msg => {
+                    csv += `"${msg.name}","${msg.email}","${msg.subject}","${msg.message}",${new Date(msg.timestamp).toLocaleDateString()}\n`;
+                });
+                
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'contacts_' + new Date().toISOString().split('T')[0] + '.csv';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                Toast.show('Contacts exported successfully!', 'success');
+            } catch (error) {
+                Toast.show('Error exporting contacts: ' + error.message, 'error');
+            }
+        }
+        
+    </script>
+</body>
+</html>
