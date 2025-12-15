@@ -57,7 +57,7 @@ export async function initializeDashboard() {
         case "company":
           window.location.href = "comadmin.html";
           break;
-        case "super-admin":
+        case "admin":
           window.location.href = "admin.html";
           break;
         default:
