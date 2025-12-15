@@ -58,7 +58,7 @@ export async function initializeDashboard() {
           window.location.href = "comadmin.html";
           break;
         case "super-admin":
-          window.location.href = "superadmin.html";
+          window.location.href = "admin.html";
           break;
         default:
           alert("⚠️ Unknown role. Redirecting.");
