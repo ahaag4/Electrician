@@ -1,1 +1,1347 @@
-<br /><div class="separator" style="clear: both; text-align: center;"><a href="https://i.postimg.cc/XvPMCyZK/image-6.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="719" data-original-width="1280" height="719" src="https://i.postimg.cc/XvPMCyZK/image-6.jpg" width="1280" /></a></div><br />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partnerships - SHUKLA-ELECTRICALS</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #f59e0b;
+            --dark: #1f2937;
+            --dark-light: #374151;
+            --text-dark: #4b5563;
+            --text-light: #9ca3af;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+            --partner-gold: #FFD700;
+            --partner-silver: #C0C0C0;
+            --partner-bronze: #CD7F32;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .navbar-brand i {
+            color: var(--primary);
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: var(--dark-light);
+            margin: 0 5px;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+            color: var(--primary);
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        /* Hero Section */
+        .partners-hero {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(245, 158, 11, 0.05));
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .partners-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+        
+        .partners-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-30%, 30%);
+        }
+        
+        .partners-hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .partners-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Partnership Tiers */
+        .partnership-tiers {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .tier-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 2px solid transparent;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tier-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .tier-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .tier-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .tier-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 0 0 0 20px;
+        }
+        
+        .tier-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .gold .tier-icon {
+            background: linear-gradient(135deg, var(--partner-gold), #FFA500);
+        }
+        
+        .silver .tier-icon {
+            background: linear-gradient(135deg, var(--partner-silver), #A8A8A8);
+        }
+        
+        .bronze .tier-icon {
+            background: linear-gradient(135deg, var(--partner-bronze), #8B4513);
+        }
+        
+        .tier-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .tier-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+        
+        .tier-price span {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .tier-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .tier-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .tier-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .tier-features li i {
+            position: absolute;
+            left: 0;
+            top: 12px;
+            color: var(--primary);
+        }
+        
+        /* Partner Benefits */
+        .partner-benefits {
+            padding: 80px 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 35px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            height: 100%;
+            border-top: 4px solid var(--primary);
+            text-align: center;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(245, 158, 11, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .benefit-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Current Partners */
+        .current-partners {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .partner-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .partner-logo {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .partner-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .partner-logo img {
+            max-width: 100%;
+            max-height: 70px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* Partnership Form */
+        .partnership-form {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(245, 158, 11, 0.03));
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius);
+            padding: 50px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border);
+            z-index: 1;
+        }
+        
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--text-light);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step.active {
+            border-color: var(--primary);
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .step.completed {
+            border-color: var(--primary);
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .step-label {
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+        
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .partners-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tier-card.featured {
+                transform: scale(1);
+            }
+            
+            .tier-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .partners-hero {
+                padding: 70px 0 50px;
+            }
+            
+            .partners-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .partners-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .step-label {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .partners-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .form-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .form-buttons .btn {
+                width: 100%;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-bolt"></i> SHUKLA-ELECTRICALS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="partners.html">Partners</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html"><i class="fas fa-cog"></i> Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="partners-hero">
+        <div class="container position-relative" style="z-index: 2;">
+            <h1>Powerful Partnerships</h1>
+            <p>Join hands with SHUKLA-ELECTRICALS to create innovative electrical solutions, expand your reach, and build a stronger industry together. We're looking for manufacturers, contractors, and distributors to grow with us.</p>
+            <a href="#apply" class="btn btn-primary btn-lg">Apply for Partnership</a>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Partners Worldwide</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Tiers -->
+    <section class="partnership-tiers">
+        <div class="container">
+            <div class="section-title">
+                <h2>Partnership Tiers</h2>
+                <p>Choose the partnership level that best fits your business goals and unlock exclusive benefits</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="tier-card bronze fade-in">
+                        <div class="tier-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Bronze Partner</h3>
+                        <div class="tier-price">Free <span>/ year</span></div>
+                        <ul class="tier-features">
+                            <li><i class="fas fa-check"></i> Company listing on our website</li>
+                            <li><i class="fas fa-check"></i> Basic referral program</li>
+                            <li><i class="fas fa-check"></i> Quarterly newsletter</li>
+                            <li><i class="fas fa-check"></i> Access to basic resources</li>
+                            <li><i class="fas fa-check"></i> Product discounts (5-10%)</li>
+                        </ul>
+                        <a href="#apply" class="btn btn-outline-primary w-100">Get Started</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="tier-card silver featured fade-in">
+                        <div class="tier-badge">Most Popular</div>
+                        <div class="tier-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3>Silver Partner</h3>
+                        <div class="tier-price">$499 <span>/ year</span></div>
+                        <ul class="tier-features">
+                            <li><i class="fas fa-check"></i> All Bronze benefits</li>
+                            <li><i class="fas fa-check"></i> Featured listing placement</li>
+                            <li><i class="fas fa-check"></i> Enhanced referral program</li>
+                            <li><i class="fas fa-check"></i> Monthly business insights</li>
+                            <li><i class="fas fa-check"></i> Product discounts (15-20%)</li>
+                            <li><i class="fas fa-check"></i> Co-branded marketing materials</li>
+                            <li><i class="fas fa-check"></i> Priority support</li>
+                        </ul>
+                        <a href="#apply" class="btn btn-primary w-100">Become a Partner</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="tier-card gold fade-in">
+                        <div class="tier-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3>Gold Partner</h3>
+                        <div class="tier-price">$999 <span>/ year</span></div>
+                        <ul class="tier-features">
+                            <li><i class="fas fa-check"></i> All Silver benefits</li>
+                            <li><i class="fas fa-check"></i> Premium website placement</li>
+                            <li><i class="fas fa-check"></i> Exclusive partnership events</li>
+                            <li><i class="fas fa-check"></i> Joint venture opportunities</li>
+                            <li><i class="fas fa-check"></i> Product discounts (25-30%)</li>
+                            <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                            <li><i class="fas fa-check"></i> Customized training programs</li>
+                            <li><i class="fas fa-check"></i> Early access to new products</li>
+                        </ul>
+                        <a href="#apply" class="btn btn-outline-primary w-100">Contact for Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Benefits -->
+    <section class="partner-benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Partner With Us?</h2>
+                <p>Discover the advantages of collaborating with SHUKLA-ELECTRICALS</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="benefit-card fade-in">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Business Growth</h4>
+                        <p>Access new markets and customer segments through our established network and reputation in the electrical industry.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="benefit-card fade-in">
+                        <div class="benefit-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Mutual Support</h4>
+                        <p>Receive technical support, training resources, and collaborative project opportunities that benefit both parties.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="benefit-card fade-in">
+                        <div class="benefit-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h4>Marketing Exposure</h4>
+                        <p>Get featured in our marketing campaigns, website, and social media channels to increase your brand visibility.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="benefit-card fade-in">
+                        <div class="benefit-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>Product Advantages</h4>
+                        <p>Gain access to quality electrical products with special partner pricing and early releases of new innovations.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="benefit-card fade-in">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Network Expansion</h4>
+                        <p>Connect with other industry professionals, contractors, and suppliers through our partner ecosystem.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="benefit-card fade-in">
+                        <div class="benefit-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4>Credibility Boost</h4>
+                        <p>Enhance your company's reputation by associating with our trusted brand in the electrical services industry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Partners -->
+    <section class="current-partners">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Valued Partners</h2>
+                <p>We're proud to collaborate with industry leaders and innovative companies</p>
+            </div>
+            
+            <div class="partner-logo-grid">
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60/374151/FFFFFF?text=ELECTRO+PRO" alt="Electro Pro">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60/10b981/FFFFFF?text=WIRE+MASTERS" alt="Wire Masters">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60/f59e0b/FFFFFF?text=SAFE+ELECTRIC" alt="Safe Electric">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60/1f2937/FFFFFF?text=POWER+SOLUTIONS" alt="Power Solutions">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60/059669/FFFFFF?text=BRIGHT+IDEAS" alt="Bright Ideas">
+                </div>
+                <div class="partner-logo">
+                    <img src="https://via.placeholder.com/150x60/4b5563/FFFFFF?text=CIRCUIT+PROS" alt="Circuit Pros">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Form -->
+    <section class="partnership-form" id="apply">
+        <div class="container">
+            <div class="section-title">
+                <h2>Apply for Partnership</h2>
+                <p>Fill out the form below to start your partnership journey with SHUKLA-ELECTRICALS</p>
+            </div>
+            
+            <div class="form-container">
+                <!-- Step Indicator -->
+                <div class="step-indicator">
+                    <div class="step active" id="step1">
+                        <span>1</span>
+                        <div class="step-label">Company</div>
+                    </div>
+                    <div class="step" id="step2">
+                        <span>2</span>
+                        <div class="step-label">Details</div>
+                    </div>
+                    <div class="step" id="step3">
+                        <span>3</span>
+                        <div class="step-label">Review</div>
+                    </div>
+                </div>
+                
+                <!-- Step 1: Company Information -->
+                <div class="form-step active" id="step1Form">
+                    <h3 class="mb-4">Company Information</h3>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="companyName" class="form-label">Company Name *</label>
+                                <input type="text" class="form-control" id="companyName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="website" class="form-label">Website</label>
+                                <input type="url" class="form-control" id="website">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="industry" class="form-label">Industry *</label>
+                                <select class="form-control" id="industry" required>
+                                    <option value="">Select Industry</option>
+                                    <option value="manufacturer">Electrical Manufacturer</option>
+                                    <option value="distributor">Electrical Distributor</option>
+                                    <option value="contractor">Electrical Contractor</option>
+                                    <option value="technology">Electrical Technology</option>
+                                    <option value="solar">Solar Energy</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="employees" class="form-label">Number of Employees</label>
+                                <select class="form-control" id="employees">
+                                    <option value="">Select Range</option>
+                                    <option value="1-10">1-10</option>
+                                    <option value="11-50">11-50</option>
+                                    <option value="51-200">51-200</option>
+                                    <option value="201-500">201-500</option>
+                                    <option value="500+">500+</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="companyDescription" class="form-label">Company Description *</label>
+                        <textarea class="form-control" id="companyDescription" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <div></div>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step <i class="fas fa-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Partnership Details -->
+                <div class="form-step" id="step2Form">
+                    <h3 class="mb-4">Partnership Details</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Partnership Tier Interested In *</label>
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <div class="form-check card p-3">
+                                    <input class="form-check-input" type="radio" name="tier" id="tierBronze" value="bronze">
+                                    <label class="form-check-label" for="tierBronze">
+                                        <strong>Bronze Partner</strong>
+                                        <div class="text-muted small">Free / year</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check card p-3">
+                                    <input class="form-check-input" type="radio" name="tier" id="tierSilver" value="silver" checked>
+                                    <label class="form-check-label" for="tierSilver">
+                                        <strong>Silver Partner</strong>
+                                        <div class="text-muted small">$499 / year</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check card p-3">
+                                    <input class="form-check-input" type="radio" name="tier" id="tierGold" value="gold">
+                                    <label class="form-check-label" for="tierGold">
+                                        <strong>Gold Partner</strong>
+                                        <div class="text-muted small">$999 / year</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="partnershipGoals" class="form-label">Partnership Goals *</label>
+                        <textarea class="form-control" id="partnershipGoals" rows="4" required></textarea>
+                        <small class="text-muted">What do you hope to achieve through this partnership?</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="previousPartners" class="form-label">Previous Partnerships (if any)</label>
+                        <textarea class="form-control" id="previousPartners" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-outline-primary" onclick="prevStep(1)"><i class="fas fa-arrow-left me-2"></i> Previous</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next Step <i class="fas fa-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Contact Information & Review -->
+                <div class="form-step" id="step3Form">
+                    <h3 class="mb-4">Contact Information & Review</h3>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contactName" class="form-label">Contact Person *</label>
+                                <input type="text" class="form-control" id="contactName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contactTitle" class="form-label">Job Title *</label>
+                                <input type="text" class="form-control" id="contactTitle" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-4 mb-4">
+                        <h5>Application Summary</h5>
+                        <div id="applicationSummary"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the <a href="#" class="text-primary">Partnership Terms & Conditions</a> and understand that my application will be reviewed within 5-7 business days.
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-outline-primary" onclick="prevStep(2)"><i class="fas fa-arrow-left me-2"></i> Previous</button>
+                        <button type="button" class="btn btn-primary" onclick="submitApplication()">Submit Application</button>
+                    </div>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3>Application Submitted!</h3>
+                    <p class="mb-4">Thank you for your interest in partnering with SHUKLA-ELECTRICALS. Our team will review your application and contact you within 5-7 business days.</p>
+                    <a href="partners.html" class="btn btn-primary">Return to Partners Page</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="mb-4"><i class="fas fa-bolt"></i> SHUKLA-ELECTRICALS</h4>
+                    <p>Professional electrical services with years of expertise in residential, commercial, and industrial installations.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="me-3 text-light"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-3 text-light"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-3 text-light"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h4 class="mb-4">Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-light text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="services.html" class="text-light text-decoration-none">Services</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-light text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-light text-decoration-none">Contact</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-light text-decoration-none">Blog</a></li>
+                        <li class="mb-2"><a href="partners.html" class="text-light text-decoration-none">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h4 class="mb-4">Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> 123 Electrical Street, City, State 12345</p>
+                    <p><i class="fas fa-phone me-2"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope me-2"></i> partners@shuklaelectricals.com</p>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <p>&copy; 2023 SHUKLA-ELECTRICALS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase and scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDGpagCpskeOxzVO4C5qgdVUTeWO8rUZUU",
+            authDomain: "electrician-830b2.firebaseapp.com",
+            databaseURL: "https://electrician-830b2-default-rtdb.firebaseio.com",
+            projectId: "electrician-830b2",
+            storageBucket: "electrician-830b2.firebasestorage.app",
+            messagingSenderId: "1053791458330",
+            appId: "1:1053791458330:web:fdbf5befa79aef2376eda3"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        
+        // Multi-step form functionality
+        let currentStep = 1;
+        
+        function nextStep(step) {
+            // Validate current step before proceeding
+            if (!validateStep(currentStep)) {
+                return;
+            }
+            
+            // Hide current step
+            document.getElementById(`step${currentStep}Form`).classList.remove('active');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            
+            // Show next step
+            document.getElementById(`step${step}Form`).classList.add('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            document.getElementById(`step${currentStep}`).classList.add('completed');
+            
+            currentStep = step;
+            
+            // Update summary on step 3
+            if (step === 3) {
+                updateApplicationSummary();
+            }
+            
+            // Scroll to top of form
+            document.getElementById('apply').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function prevStep(step) {
+            // Hide current step
+            document.getElementById(`step${currentStep}Form`).classList.remove('active');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            
+            // Show previous step
+            document.getElementById(`step${step}Form`).classList.add('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            
+            currentStep = step;
+            
+            // Scroll to top of form
+            document.getElementById('apply').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function validateStep(step) {
+            if (step === 1) {
+                const companyName = document.getElementById('companyName').value;
+                const industry = document.getElementById('industry').value;
+                const companyDescription = document.getElementById('companyDescription').value;
+                
+                if (!companyName || !industry || !companyDescription) {
+                    alert('Please fill in all required fields in Step 1.');
+                    return false;
+                }
+            } else if (step === 2) {
+                const partnershipGoals = document.getElementById('partnershipGoals').value;
+                const tierSelected = document.querySelector('input[name="tier"]:checked');
+                
+                if (!partnershipGoals || !tierSelected) {
+                    alert('Please fill in all required fields in Step 2.');
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        function updateApplicationSummary() {
+            const summary = document.getElementById('applicationSummary');
+            
+            const companyName = document.getElementById('companyName').value;
+            const industry = document.getElementById('industry').value;
+            const companyDescription = document.getElementById('companyDescription').value;
+            const partnershipGoals = document.getElementById('partnershipGoals').value;
+            const tier = document.querySelector('input[name="tier"]:checked').value;
+            const contactName = document.getElementById('contactName').value;
+            const contactTitle = document.getElementById('contactTitle').value;
+            const email = document.getElementById('email').value;
+            
+            let tierName = '';
+            switch(tier) {
+                case 'bronze': tierName = 'Bronze Partner'; break;
+                case 'silver': tierName = 'Silver Partner'; break;
+                case 'gold': tierName = 'Gold Partner'; break;
+            }
+            
+            let industryName = '';
+            switch(industry) {
+                case 'manufacturer': industryName = 'Electrical Manufacturer'; break;
+                case 'distributor': industryName = 'Electrical Distributor'; break;
+                case 'contractor': industryName = 'Electrical Contractor'; break;
+                case 'technology': industryName = 'Electrical Technology'; break;
+                case 'solar': industryName = 'Solar Energy'; break;
+                case 'other': industryName = 'Other'; break;
+            }
+            
+            summary.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Company:</strong> ${companyName}</p>
+                        <p><strong>Industry:</strong> ${industryName}</p>
+                        <p><strong>Partnership Tier:</strong> ${tierName}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Contact:</strong> ${contactName}</p>
+                        <p><strong>Title:</strong> ${contactTitle}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <p><strong>Company Description:</strong> ${companyDescription.substring(0, 150)}${companyDescription.length > 150 ? '...' : ''}</p>
+                </div>
+            `;
+        }
+        
+        function submitApplication() {
+            // Validate step 3
+            const contactName = document.getElementById('contactName').value;
+            const contactTitle = document.getElementById('contactTitle').value;
+            const email = document.getElementById('email').value;
+            const terms = document.getElementById('terms').checked;
+            
+            if (!contactName || !contactTitle || !email || !terms) {
+                alert('Please fill in all required fields and agree to the terms.');
+                return;
+            }
+            
+            // Gather all form data
+            const applicationData = {
+                companyName: document.getElementById('companyName').value,
+                website: document.getElementById('website').value,
+                industry: document.getElementById('industry').value,
+                employees: document.getElementById('employees').value,
+                companyDescription: document.getElementById('companyDescription').value,
+                partnershipGoals: document.getElementById('partnershipGoals').value,
+                previousPartners: document.getElementById('previousPartners').value,
+                tier: document.querySelector('input[name="tier"]:checked').value,
+                contactName: contactName,
+                contactTitle: contactTitle,
+                email: email,
+                phone: document.getElementById('phone').value,
+                timestamp: Date.now(),
+                status: 'pending'
+            };
+            
+            // Save to Firebase
+            const applicationsRef = database.ref('partnershipApplications');
+            const newApplicationRef = applicationsRef.push();
+            
+            newApplicationRef.set(applicationData)
+                .then(() => {
+                    // Hide form, show success message
+                    document.getElementById('step3Form').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Send confirmation email (simulated)
+                    sendConfirmationEmail(applicationData);
+                })
+                .catch((error) => {
+                    console.error('Error saving application:', error);
+                    alert('There was an error submitting your application. Please try again.');
+                });
+        }
+        
+        function sendConfirmationEmail(data) {
+            // In a real application, this would call a backend service
+            console.log('Confirmation email would be sent to:', data.email);
+            console.log('Application data:', data);
+        }
+        
+        // Add animation to elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(element);
+            });
+            
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+  </html>
